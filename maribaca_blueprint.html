@@ -1,0 +1,2986 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MariBaca — Blueprint v2.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg0: #080c14;
+  --bg1: #0e1420;
+  --bg2: #141d2e;
+  --bg3: #1a2540;
+  --bg4: #223052;
+  --border: #2a3a56;
+  --border2: #344a6e;
+  --purple: #7c5cfc;
+  --purple2: #9d82fd;
+  --purple3: #c4b0ff;
+  --teal: #0fb8a0;
+  --teal2: #3dd5bf;
+  --amber: #f0a43a;
+  --amber2: #ffd080;
+  --green: #22c97e;
+  --green2: #6fedb5;
+  --red: #f0544f;
+  --blue: #3a9cfc;
+  --blue2: #7dc3ff;
+  --pink: #f066b0;
+  --text0: #e8f0ff;
+  --text1: #b8cce0;
+  --text2: #7a92b4;
+  --text3: #4a6080;
+  --radius: 8px;
+  --radius2: 12px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg0);
+  color: var(--text0);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.header {
+  padding: 48px 40px 36px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, #0b1220 0%, var(--bg0) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(124,92,252,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.header-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.header-icon {
+  width: 64px; height: 64px;
+  background: linear-gradient(135deg, var(--purple) 0%, var(--teal) 100%);
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+  flex-shrink: 0;
+}
+.header-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text0);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.header-sub {
+  font-size: 15px;
+  color: var(--text2);
+  margin-bottom: 14px;
+}
+.header-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: 'JetBrains Mono', monospace;
+}
+.badge-purple { background: rgba(124,92,252,0.15); color: var(--purple3); border: 1px solid rgba(124,92,252,0.3); }
+.badge-teal   { background: rgba(15,184,160,0.12); color: var(--teal2); border: 1px solid rgba(15,184,160,0.3); }
+.badge-amber  { background: rgba(240,164,58,0.12); color: var(--amber2); border: 1px solid rgba(240,164,58,0.3); }
+.badge-green  { background: rgba(34,201,126,0.12); color: var(--green2); border: 1px solid rgba(34,201,126,0.3); }
+.badge-blue   { background: rgba(58,156,252,0.12); color: var(--blue2); border: 1px solid rgba(58,156,252,0.3); }
+.badge-red    { background: rgba(240,84,79,0.12); color: #ff9e9b; border: 1px solid rgba(240,84,79,0.3); }
+.badge-gray   { background: rgba(120,140,180,0.1); color: var(--text2); border: 1px solid var(--border); }
+.badge-pink   { background: rgba(240,102,176,0.12); color: #ffb3e0; border: 1px solid rgba(240,102,176,0.3); }
+
+/* ── TABS NAV ── */
+.tabs-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(8,12,20,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 40px;
+  overflow-x: auto;
+}
+.tabs-nav::-webkit-scrollbar { height: 3px; }
+.tabs-nav::-webkit-scrollbar-track { background: transparent; }
+.tabs-nav::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+.tabs-list {
+  display: flex;
+  gap: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-width: max-content;
+}
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 14px 18px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text2);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+}
+.tab-btn:hover { color: var(--text1); }
+.tab-btn.active { color: var(--purple2); border-bottom-color: var(--purple); }
+
+/* ── CONTENT ── */
+.content-area {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 36px 40px 80px;
+}
+.tab-section { display: none; }
+.tab-section.active { display: block; }
+
+/* ── TYPOGRAPHY ── */
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text0);
+  margin-bottom: 6px;
+}
+.section-desc {
+  color: var(--text2);
+  margin-bottom: 28px;
+  font-size: 14px;
+}
+h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text1);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── GRID ── */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+/* ── CARDS ── */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius2);
+  padding: 20px;
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.card-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+.card-title { font-weight: 600; font-size: 15px; color: var(--text0); }
+.card-sub { font-size: 12px; color: var(--text2); }
+
+/* ── FOLDER TREE ── */
+.tree {
+  background: var(--bg1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius2);
+  padding: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+}
+.tree-line {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  line-height: 1.9;
+  white-space: nowrap;
+}
+.tree-indent { display: inline-block; width: 20px; flex-shrink: 0; }
+.tree-conn { color: var(--text3); }
+.tree-folder { color: var(--amber); font-weight: 500; }
+.tree-file { color: var(--text1); }
+.tree-file-ts { color: var(--blue2); }
+.tree-file-tsx { color: var(--purple3); }
+.tree-file-json { color: var(--amber2); }
+.tree-file-prisma { color: var(--teal2); }
+.tree-file-env { color: var(--green2); }
+.tree-comment { color: var(--text3); font-style: italic; }
+
+/* ── CODE BLOCK ── */
+.code-block {
+  background: var(--bg1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius2);
+  overflow: hidden;
+  margin: 12px 0;
+}
+.code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+.code-lang {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.code-filename { font-size: 12px; color: var(--teal2); font-family: 'JetBrains Mono', monospace; }
+pre {
+  padding: 18px 20px;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+pre::-webkit-scrollbar { height: 4px; }
+pre::-webkit-scrollbar-track { background: transparent; }
+pre::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+.kw  { color: var(--purple2); }
+.str { color: var(--green2); }
+.num { color: var(--amber2); }
+.cm  { color: var(--text3); font-style: italic; }
+.fn  { color: var(--teal2); }
+.ty  { color: var(--blue2); }
+.op  { color: var(--pink); }
+
+/* ── ARCHITECTURE LAYERS ── */
+.arch-layer {
+  border: 1px solid var(--border);
+  border-radius: var(--radius2);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.arch-layer-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  font-weight: 600;
+  font-size: 13px;
+}
+.arch-layer-body {
+  padding: 14px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.arch-chip {
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  border: 1px solid transparent;
+}
+.layer-client  .arch-layer-header { background: rgba(124,92,252,0.12); color: var(--purple3); }
+.layer-client  .arch-chip { background: rgba(124,92,252,0.1); color: var(--purple3); border-color: rgba(124,92,252,0.25); }
+.layer-api     .arch-layer-header { background: rgba(15,184,160,0.1); color: var(--teal2); }
+.layer-api     .arch-chip { background: rgba(15,184,160,0.08); color: var(--teal2); border-color: rgba(15,184,160,0.2); }
+.layer-service .arch-layer-header { background: rgba(240,164,58,0.1); color: var(--amber2); }
+.layer-service .arch-chip { background: rgba(240,164,58,0.08); color: var(--amber2); border-color: rgba(240,164,58,0.2); }
+.layer-data    .arch-layer-header { background: rgba(58,156,252,0.1); color: var(--blue2); }
+.layer-data    .arch-chip { background: rgba(58,156,252,0.08); color: var(--blue2); border-color: rgba(58,156,252,0.2); }
+.layer-infra   .arch-layer-header { background: rgba(34,201,126,0.08); color: var(--green2); }
+.layer-infra   .arch-chip { background: rgba(34,201,126,0.06); color: var(--green2); border-color: rgba(34,201,126,0.2); }
+.arch-arrow {
+  text-align: center;
+  color: var(--text3);
+  font-size: 18px;
+  margin: -4px 0;
+  line-height: 1;
+}
+
+/* ── STACK CARDS ── */
+.stack-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius2);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.15s;
+}
+.stack-card:hover { border-color: var(--border2); }
+.stack-name { font-weight: 600; font-size: 14px; }
+.stack-ver { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text3); }
+.stack-desc { font-size: 12px; color: var(--text2); line-height: 1.5; }
+
+/* ── DB SCHEMA ── */
+.db-table {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius2);
+  overflow: hidden;
+}
+.db-table-header {
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+  font-size: 13px;
+}
+.db-field {
+  display: grid;
+  grid-template-columns: 1fr 80px 60px;
+  gap: 8px;
+  padding: 7px 16px;
+  border-bottom: 1px solid rgba(42,58,86,0.5);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  align-items: center;
+}
+.db-field:last-child { border-bottom: none; }
+.db-field:hover { background: var(--bg3); }
+.field-name { color: var(--text1); }
+.field-type { color: var(--teal2); }
+.field-pk { color: var(--amber2); font-size: 10px; font-weight: 600; }
+.field-fk { color: var(--blue2); font-size: 10px; }
+.field-opt { color: var(--text3); font-size: 10px; }
+
+/* ── API TABLE ── */
+.api-group { margin-bottom: 28px; }
+.api-group-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.api-row {
+  display: grid;
+  grid-template-columns: 72px 280px 1fr 80px;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 3px;
+  align-items: center;
+  font-size: 13px;
+  transition: background 0.1s;
+}
+.api-row:hover { background: var(--bg2); }
+.method {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  min-width: 60px;
+}
+.m-get    { background: rgba(34,201,126,0.12); color: var(--green2); border: 1px solid rgba(34,201,126,0.25); }
+.m-post   { background: rgba(58,156,252,0.12); color: var(--blue2); border: 1px solid rgba(58,156,252,0.25); }
+.m-patch  { background: rgba(240,164,58,0.12); color: var(--amber2); border: 1px solid rgba(240,164,58,0.25); }
+.m-delete { background: rgba(240,84,79,0.12); color: #ff9e9b; border: 1px solid rgba(240,84,79,0.25); }
+.api-path { font-family: 'JetBrains Mono', monospace; color: var(--text1); font-size: 12px; }
+.api-desc { color: var(--text2); font-size: 12.5px; }
+.api-auth { text-align: right; }
+.auth-chip {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.auth-pub  { background: rgba(120,140,180,0.1); color: var(--text3); border: 1px solid var(--border); }
+.auth-jwt  { background: rgba(124,92,252,0.1); color: var(--purple3); border: 1px solid rgba(124,92,252,0.2); }
+.auth-own  { background: rgba(240,164,58,0.1); color: var(--amber2); border: 1px solid rgba(240,164,58,0.2); }
+
+/* ── ROADMAP ── */
+.roadmap { position: relative; }
+.phase-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius2);
+  padding: 24px;
+  margin-bottom: 16px;
+  position: relative;
+  border-left: 3px solid transparent;
+}
+.phase-done   { border-left-color: var(--green); }
+.phase-active { border-left-color: var(--blue); }
+.phase-soon   { border-left-color: var(--amber); }
+.phase-future { border-left-color: var(--text3); }
+.phase-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.phase-num {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text3);
+  margin-bottom: 4px;
+}
+.phase-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text0);
+}
+.phase-period { font-size: 12px; color: var(--text2); }
+.phase-status {
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.status-done   { background: rgba(34,201,126,0.12); color: var(--green2); border: 1px solid rgba(34,201,126,0.25); }
+.status-active { background: rgba(58,156,252,0.12); color: var(--blue2); border: 1px solid rgba(58,156,252,0.25); }
+.status-soon   { background: rgba(240,164,58,0.12); color: var(--amber2); border: 1px solid rgba(240,164,58,0.25); }
+.status-future { background: rgba(120,140,180,0.08); color: var(--text2); border: 1px solid var(--border); }
+.task-list { display: flex; flex-direction: column; gap: 6px; }
+.task {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text2);
+}
+.task-done  { color: var(--text2); }
+.task-todo  { color: var(--text2); opacity: 0.6; }
+.check-done { color: var(--green); flex-shrink: 0; }
+.check-todo { color: var(--text3); flex-shrink: 0; }
+.task-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.phase-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+
+/* ── DONATION FLOW ── */
+.donation-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.flow-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+.flow-box {
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+}
+.flow-down {
+  color: var(--text3);
+  font-size: 20px;
+  line-height: 1;
+  text-align: center;
+  margin: 4px 0;
+}
+.flow-reader { background: rgba(124,92,252,0.15); border: 1px solid rgba(124,92,252,0.3); color: var(--purple3); }
+.flow-platform { background: rgba(15,184,160,0.1); border: 1px solid rgba(15,184,160,0.25); color: var(--teal2); }
+.flow-method { background: var(--bg3); border: 1px solid var(--border); color: var(--text1); font-size: 12px; }
+.flow-writer { background: rgba(34,201,126,0.1); border: 1px solid rgba(34,201,126,0.25); color: var(--green2); }
+.flow-note {
+  background: rgba(240,164,58,0.06);
+  border: 1px solid rgba(240,164,58,0.2);
+  border-radius: var(--radius);
+  padding: 12px 18px;
+  font-size: 12px;
+  color: var(--amber2);
+  text-align: center;
+  width: 100%;
+  margin-top: 12px;
+}
+
+/* ── UI MOCKUPS ── */
+.browser-frame {
+  background: var(--bg1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius2);
+  overflow: hidden;
+  font-size: 11px;
+}
+.browser-bar {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.browser-dots {
+  display: flex;
+  gap: 5px;
+}
+.browser-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+.b-red    { background: #f0544f; }
+.b-yellow { background: #f0a43a; }
+.b-green  { background: #22c97e; }
+.browser-url {
+  flex: 1;
+  background: var(--bg3);
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  color: var(--text3);
+}
+.browser-content { padding: 16px; }
+
+.mock-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.mock-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  background: linear-gradient(90deg, var(--purple2), var(--teal2));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.mock-nav-links { display: flex; gap: 12px; color: var(--text2); font-size: 10px; }
+.mock-btn {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 600;
+}
+.mock-btn-primary { background: var(--purple); color: white; }
+.mock-btn-outline { border: 1px solid var(--border2); color: var(--text2); }
+
+.mock-hero {
+  text-align: center;
+  padding: 20px 0 16px;
+}
+.mock-hero-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+.mock-hero-sub { color: var(--text2); font-size: 11px; margin-bottom: 14px; }
+
+.mock-novel-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.mock-novel-card {
+  background: var(--bg3);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.mock-cover { height: 60px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.mock-card-info { padding: 6px; }
+.mock-novel-title { font-weight: 600; font-size: 10px; color: var(--text0); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mock-novel-meta { font-size: 9px; color: var(--text3); }
+
+.mock-chapter-reader {
+  background: var(--bg3);
+  border-radius: 8px;
+  padding: 14px 20px;
+}
+.mock-chapter-title { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; margin-bottom: 10px; text-align: center; }
+.mock-chapter-text { font-size: 11px; color: var(--text1); line-height: 1.8; }
+.mock-chapter-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.mock-profile {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.mock-avatar {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--purple), var(--teal));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+.mock-author-name { font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+.mock-author-bio { font-size: 10px; color: var(--text2); }
+.mock-author-stats { display: flex; gap: 14px; margin-top: 6px; }
+.mock-stat { font-size: 10px; }
+.mock-stat-num { font-weight: 700; color: var(--text0); }
+.mock-stat-label { color: var(--text3); }
+
+.donation-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+}
+.d-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  background: var(--bg3);
+}
+.d-btn-bmc { border-color: rgba(240,164,58,0.3); background: rgba(240,164,58,0.06); color: var(--amber2); }
+.d-btn-paypal { border-color: rgba(58,156,252,0.3); background: rgba(58,156,252,0.06); color: var(--blue2); }
+.d-btn-crypto { border-color: rgba(34,201,126,0.3); background: rgba(34,201,126,0.06); color: var(--green2); }
+
+/* ── RULES TABLE ── */
+.rules-table {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius2);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.rules-table table { width: 100%; border-collapse: collapse; }
+.rules-table th {
+  background: var(--bg3);
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--border);
+}
+.rules-table td {
+  padding: 9px 16px;
+  font-size: 12.5px;
+  border-bottom: 1px solid rgba(42,58,86,0.5);
+  color: var(--text1);
+}
+.rules-table tr:last-child td { border-bottom: none; }
+.rules-table tr:hover td { background: var(--bg3); }
+.rules-table code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  background: var(--bg0);
+  padding: 1px 6px;
+  border-radius: 3px;
+  color: var(--teal2);
+}
+
+/* ── APP FLOW ── */
+.flow-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 20px 0;
+}
+.flow-node {
+  padding: 9px 20px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 500;
+  text-align: center;
+  min-width: 200px;
+}
+.fn-start    { background: rgba(124,92,252,0.15); border: 1px solid rgba(124,92,252,0.35); color: var(--purple3); }
+.fn-action   { background: var(--bg3); border: 1px solid var(--border2); color: var(--text1); }
+.fn-decision {
+  background: rgba(240,164,58,0.1);
+  border: 1px solid rgba(240,164,58,0.3);
+  color: var(--amber2);
+  transform: rotate(0deg);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  padding: 18px 28px;
+  min-width: 180px;
+}
+.fn-outcome  { background: rgba(34,201,126,0.1); border: 1px solid rgba(34,201,126,0.25); color: var(--green2); }
+.fn-data     { background: rgba(58,156,252,0.1); border: 1px solid rgba(58,156,252,0.25); color: var(--blue2); border-radius: 0; }
+.fn-end      { background: rgba(240,84,79,0.1); border: 1px solid rgba(240,84,79,0.25); color: #ff9e9b; }
+.flow-arrow  { color: var(--text3); font-size: 16px; line-height: 1; }
+.flow-label  { font-size: 10px; color: var(--text3); font-family: 'JetBrains Mono', monospace; }
+.flow-fork {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  max-width: 500px;
+}
+.flow-fork-branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ── ENV VARS ── */
+.env-section {
+  background: var(--bg1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius2);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.env-header {
+  background: var(--bg2);
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: 'JetBrains Mono', monospace;
+}
+.env-line {
+  display: flex;
+  gap: 16px;
+  padding: 7px 16px;
+  border-bottom: 1px solid rgba(42,58,86,0.4);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  align-items: baseline;
+}
+.env-line:last-child { border-bottom: none; }
+.env-key   { color: var(--teal2); flex-shrink: 0; min-width: 220px; }
+.env-val   { color: var(--amber2); opacity: 0.6; }
+.env-desc  { color: var(--text3); font-size: 11px; }
+
+/* ── DIVIDER ── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 28px 0;
+}
+
+/* ── INFO BOX ── */
+.info-box {
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.info-purple { background: rgba(124,92,252,0.08); border: 1px solid rgba(124,92,252,0.2); color: var(--purple3); }
+.info-teal   { background: rgba(15,184,160,0.07); border: 1px solid rgba(15,184,160,0.2); color: var(--teal2); }
+.info-amber  { background: rgba(240,164,58,0.07); border: 1px solid rgba(240,164,58,0.2); color: var(--amber2); }
+.info-green  { background: rgba(34,201,126,0.07); border: 1px solid rgba(34,201,126,0.2); color: var(--green2); }
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  padding: 24px;
+  color: var(--text3);
+  font-size: 12px;
+  border-top: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg0); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ── AUTH CHIP ADMIN ── */
+.auth-admin { background: rgba(240,84,79,0.12); color: #ff9e9b; border: 1px solid rgba(240,84,79,0.25); }
+.auth-super  { background: rgba(240,102,176,0.12); color: #ffb3e0; border: 1px solid rgba(240,102,176,0.25); }
+
+/* ── VISION BOX ── */
+.vision-box {
+  background: linear-gradient(135deg, rgba(124,92,252,0.1) 0%, rgba(15,184,160,0.08) 100%);
+  border: 1px solid rgba(124,92,252,0.25);
+  border-radius: var(--radius2);
+  padding: 24px 28px;
+  margin-bottom: 24px;
+}
+.vision-box .vision-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  background: linear-gradient(90deg, var(--purple2), var(--teal2));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+.vision-box .vision-sub { color: var(--text1); font-size: 14px; line-height: 1.7; }
+.vision-box .founder-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(124,92,252,0.2);
+}
+.founder-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--purple), var(--teal));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+
+/* ── ROLE HIERARCHY ── */
+.role-tree {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  background: var(--bg1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius2);
+}
+.role-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  font-size: 13px;
+}
+.role-superadmin { background: rgba(240,102,176,0.1); border: 1px solid rgba(240,102,176,0.25); }
+.role-admin       { background: rgba(240,84,79,0.08); border: 1px solid rgba(240,84,79,0.2); }
+.role-author      { background: rgba(124,92,252,0.08); border: 1px solid rgba(124,92,252,0.2); }
+.role-reader      { background: rgba(120,140,180,0.06); border: 1px solid var(--border); }
+.role-icon { font-size: 18px; flex-shrink: 0; }
+.role-name { font-weight: 700; min-width: 120px; }
+.role-desc { color: var(--text2); font-size: 12px; }
+.role-perms { display: flex; flex-wrap: wrap; gap: 4px; margin-left: auto; }
+.perm-chip {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  color: var(--text2);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 800px) {
+  .header { padding: 28px 20px; }
+  .content-area { padding: 24px 20px 60px; }
+  .tabs-nav { padding: 0 20px; }
+  .grid2, .grid3, .grid4 { grid-template-columns: 1fr; }
+  .api-row { grid-template-columns: 64px 1fr; }
+  .api-desc, .api-auth { display: none; }
+  .task-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ╔═══════════════════════════════╗ -->
+<!-- ║           HEADER              ║ -->
+<!-- ╚═══════════════════════════════╝ -->
+<header class="header">
+  <div class="header-top">
+    <div class="header-icon">📖</div>
+    <div>
+      <div style="font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace;margin-bottom:4px;">Blueprint v2.0 · April 2026 · maribaca.com</div>
+      <div class="header-title">MariBaca</div>
+      <div class="header-sub">Platform kreasi & ekspresi penulis Indonesia · Gratis · PWA · Admin Panel · i18n ID/EN · Light &amp; Dark Theme</div>
+      <div class="header-badges">
+        <span class="badge badge-purple">Next.js 14</span>
+        <span class="badge badge-teal">Node.js + Express</span>
+        <span class="badge badge-blue">PostgreSQL</span>
+        <span class="badge badge-amber">Redis</span>
+        <span class="badge badge-green">Cloudflare R2</span>
+        <span class="badge badge-pink">Meilisearch</span>
+        <span class="badge badge-gray">Docker</span>
+        <span class="badge badge-gray">TypeScript</span>
+        <span class="badge badge-purple">Prisma ORM</span>
+        <span class="badge badge-teal">Socket.io</span>
+        <span class="badge badge-green">PWA</span>
+        <span class="badge badge-amber">i18n ID/EN</span>
+        <span class="badge badge-blue">Light/Dark Theme</span>
+        <span class="badge badge-red">Admin Panel</span>
+        <span class="badge badge-pink">SuperAdmin</span>
+      </div>
+      <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);display:flex;align-items:center;gap:10px">
+        <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--teal));display:flex;align-items:center;justify-content:center;font-size:15px">👤</div>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--text0)">Agastya Bimantara Putra</div>
+          <div style="font-size:11px;color:var(--text3)">Founder & Owner · MariBaca — Wadah kreasi penulis Indonesia</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ╔═══════════════════════════════╗ -->
+<!-- ║           TAB NAV             ║ -->
+<!-- ╚═══════════════════════════════╝ -->
+<nav class="tabs-nav">
+  <div class="tabs-list">
+    <button class="tab-btn active" onclick="showTab('identitas')">🏠 Identitas</button>
+    <button class="tab-btn" onclick="showTab('struktur')">📁 Struktur</button>
+    <button class="tab-btn" onclick="showTab('arsitektur')">🏛 Arsitektur</button>
+    <button class="tab-btn" onclick="showTab('stack')">🧩 Tech Stack</button>
+    <button class="tab-btn" onclick="showTab('database')">🗄 Database</button>
+    <button class="tab-btn" onclick="showTab('api')">🔄 API Routes</button>
+    <button class="tab-btn" onclick="showTab('admin')">🛡 Admin System</button>
+    <button class="tab-btn" onclick="showTab('i18n')">🌐 i18n &amp; Tema</button>
+    <button class="tab-btn" onclick="showTab('roadmap')">🗓 Roadmap</button>
+    <button class="tab-btn" onclick="showTab('donasi')">💸 Donasi &amp; Revenue</button>
+    <button class="tab-btn" onclick="showTab('ui')">📱 UI Preview</button>
+    <button class="tab-btn" onclick="showTab('rules')">⚙ Rules &amp; Env</button>
+    <button class="tab-btn" onclick="showTab('flow')">🗺 App Flow</button>
+  </div>
+</nav>
+
+<div class="content-area">
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║   TAB 0: IDENTITAS MARIBACA                  ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<section id="tab-identitas" class="tab-section active">
+  <div class="section-title">Identitas &amp; Visi MariBaca</div>
+  <div class="section-desc">Platform kreasi untuk penulis Indonesia · maribaca.com</div>
+
+  <div class="vision-box">
+    <div class="vision-title">MariBaca — Wadah Kreasi Penulis Indonesia</div>
+    <div class="vision-sub">
+      MariBaca lahir dari satu keyakinan sederhana: <strong>setiap orang Indonesia punya cerita yang layak untuk diceritakan</strong>. Platform ini hadir sebagai ruang ekspresi yang bebas, terbuka, dan mendukung — di mana penulis dari Sabang sampai Merauke bisa menuliskan seluruh ide, imajinasi, dan kisah mereka tanpa hambatan teknis maupun finansial.
+      <br><br>
+      Kami tidak ingin MariBaca hanya menjadi tempat membaca. Kami ingin MariBaca menjadi <em>rumah kreatif</em> — tempat di mana komunitas tumbuh, penulis dihargai, dan pembaca menemukan dunia baru dalam setiap chapter.
+    </div>
+    <div class="founder-row">
+      <div class="founder-avatar">👨‍💻</div>
+      <div>
+        <div style="font-weight:700;font-size:15px;color:var(--text0)">Agastya Bimantara Putra</div>
+        <div style="font-size:12px;color:var(--text2)">Founder &amp; Owner · MariBaca</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:3px">"Platform ini bukan sekadar website novel. Ini adalah wadah kreasi anak bangsa."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid3" style="margin-bottom:28px">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(124,92,252,0.15)">🎯</div>
+        <div><div class="card-title">Misi</div></div>
+      </div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.7">Menyediakan platform penulisan &amp; pembacaan novel yang <strong>gratis, inklusif, dan mendukung kreator Indonesia</strong> untuk berkarya dan mendapat apresiasi langsung dari pembaca.</div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(15,184,160,0.15)">👁</div>
+        <div><div class="card-title">Visi</div></div>
+      </div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.7">Menjadi <strong>platform literasi digital nomor satu Indonesia</strong> — tempat di mana karya lokal dirayakan, komunitas penulis berkembang, dan budaya membaca tumbuh di seluruh pelosok nusantara.</div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(240,164,58,0.15)">💡</div>
+        <div><div class="card-title">Nilai Utama</div></div>
+      </div>
+      <ul style="font-size:13px;color:var(--text2);line-height:2;padding-left:16px">
+        <li>Kreativitas tanpa batas</li>
+        <li>Komunitas yang supportif</li>
+        <li>Transparansi &amp; kepercayaan</li>
+        <li>Konten aman &amp; termoderasi</li>
+        <li>Penulis sebagai prioritas</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Identitas Brand</h3>
+  <div class="grid2" style="margin-bottom:28px">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(124,92,252,0.15)">🔤</div>
+        <div><div class="card-title">Nama &amp; Domain</div></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+        <div style="display:flex;gap:12px;font-size:13px"><span style="color:var(--text3);min-width:100px">Nama Platform</span><strong style="color:var(--text0)">MariBaca</strong></div>
+        <div style="display:flex;gap:12px;font-size:13px"><span style="color:var(--text3);min-width:100px">Domain Utama</span><code style="font-family:monospace;color:var(--teal2)">maribaca.com</code></div>
+        <div style="display:flex;gap:12px;font-size:13px"><span style="color:var(--text3);min-width:100px">API</span><code style="font-family:monospace;color:var(--teal2)">api.maribaca.com</code></div>
+        <div style="display:flex;gap:12px;font-size:13px"><span style="color:var(--text3);min-width:100px">CDN/Assets</span><code style="font-family:monospace;color:var(--teal2)">assets.maribaca.com</code></div>
+        <div style="display:flex;gap:12px;font-size:13px"><span style="color:var(--text3);min-width:100px">Admin Portal</span><code style="font-family:monospace;color:var(--red)">admin.maribaca.com</code></div>
+        <div style="display:flex;gap:12px;font-size:13px"><span style="color:var(--text3);min-width:100px">Email</span><code style="font-family:monospace;color:var(--text2)">hi@maribaca.com</code></div>
+        <div style="display:flex;gap:12px;font-size:13px"><span style="color:var(--text3);min-width:100px">Tagline</span><span style="color:var(--purple2);font-style:italic">"Tulis. Bagikan. Ilhami."</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(34,201,126,0.15)">🎨</div>
+        <div><div class="card-title">Brand Colors &amp; Tone</div></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+        <div style="display:flex;gap:12px;align-items:center;font-size:13px"><div style="width:20px;height:20px;border-radius:4px;background:linear-gradient(135deg,#7c5cfc,#0fb8a0)"></div><span style="color:var(--text2)">Primary Gradient — Ungu ke Teal</span></div>
+        <div style="display:flex;gap:12px;align-items:center;font-size:13px"><div style="width:20px;height:20px;border-radius:4px;background:#7c5cfc"></div><span style="color:var(--text2)">Primary Purple <code style="font-family:monospace;font-size:10px">#7c5cfc</code></span></div>
+        <div style="display:flex;gap:12px;align-items:center;font-size:13px"><div style="width:20px;height:20px;border-radius:4px;background:#0fb8a0"></div><span style="color:var(--text2)">Accent Teal <code style="font-family:monospace;font-size:10px">#0fb8a0</code></span></div>
+        <div style="margin-top:6px;font-size:12px;color:var(--text2)"><strong>Tone of Voice:</strong> Hangat, semangat, inklusif, tidak formal tapi tetap profesional. Bahasa Indonesia sebagai default.</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Komunitas Target &amp; Daya Tarik</h3>
+  <div class="grid3">
+    <div class="card">
+      <div class="card-header"><div class="card-icon" style="background:rgba(240,102,176,0.15)">✍</div><div><div class="card-title">Penulis Pemula</div></div></div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.6">Tidak perlu resume atau pengalaman. MariBaca adalah tempat memulai. Editor kaya fitur, komunitas supportif, dan pembaca yang antusias.</div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-icon" style="background:rgba(58,156,252,0.15)">📖</div><div><div class="card-title">Pembaca Setia</div></div></div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.6">Konten lokal yang autentik, update rutin dari penulis favorit, bisa baca di mana saja (PWA), dan bisa langsung mendukung penulis idola.</div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-icon" style="background:rgba(34,201,126,0.15)">🌱</div><div><div class="card-title">Penulis Profesional</div></div></div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.6">Statistik lengkap, sistem donasi tanpa potongan, badge verifikasi, dan audiens yang sudah teredukasi untuk menghargai karya lokal Indonesia.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║   TAB ADMIN SYSTEM                           ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<section id="tab-admin" class="tab-section">
+  <div class="section-title">Admin &amp; SuperAdmin System</div>
+  <div class="section-desc">Hierarki role · Login terpisah · Moderasi konten · Audit trail · Kontrol peraturan platform</div>
+
+  <div class="info-box info-amber">
+    <span>⚠</span>
+    <span><strong>Penting:</strong> Admin login melalui portal terpisah di <code style="font-family:monospace;font-size:11px">admin.maribaca.com</code> — bukan melalui aplikasi user biasa. Token admin memiliki scope berbeda dengan user JWT.</span>
+  </div>
+
+  <h3>Hierarki Role</h3>
+  <div class="role-tree" style="margin-bottom:24px">
+    <div class="role-row role-superadmin">
+      <div class="role-icon">👑</div>
+      <div class="role-name" style="color:#ffb3e0">SUPERADMIN</div>
+      <div class="role-desc">Agastya (Founder) + orang kepercayaan. Satu-satunya yang bisa beri/cabut role ADMIN.</div>
+      <div class="role-perms">
+        <span class="perm-chip">assign_admin</span>
+        <span class="perm-chip">revoke_admin</span>
+        <span class="perm-chip">platform_settings</span>
+        <span class="perm-chip">view_revenue</span>
+        <span class="perm-chip">all_admin_perms</span>
+      </div>
+    </div>
+    <div style="text-align:center;color:var(--text3);font-size:20px;margin:2px 0">↑ memberikan role</div>
+    <div class="role-row role-admin">
+      <div class="role-icon">🛡</div>
+      <div class="role-name" style="color:#ff9e9b">ADMIN</div>
+      <div class="role-desc">Moderator konten. Ditunjuk SuperAdmin. Bertanggung jawab menjaga peraturan platform.</div>
+      <div class="role-perms">
+        <span class="perm-chip">ban_user</span>
+        <span class="perm-chip">delete_novel</span>
+        <span class="perm-chip">delete_comment</span>
+        <span class="perm-chip">review_reports</span>
+        <span class="perm-chip">view_logs</span>
+        <span class="perm-chip">send_system_notif</span>
+      </div>
+    </div>
+    <div style="text-align:center;color:var(--text3);font-size:20px;margin:2px 0">↑ dimoderasi oleh</div>
+    <div class="role-row role-author">
+      <div class="role-icon">✍</div>
+      <div class="role-name" style="color:var(--purple3)">AUTHOR</div>
+      <div class="role-desc">User yang aktif mempublish novel. Bisa diset otomatis saat user pertama publish novel.</div>
+      <div class="role-perms">
+        <span class="perm-chip">create_novel</span>
+        <span class="perm-chip">publish_chapter</span>
+        <span class="perm-chip">manage_own_content</span>
+        <span class="perm-chip">donation_setup</span>
+      </div>
+    </div>
+    <div class="role-row role-reader">
+      <div class="role-icon">📖</div>
+      <div class="role-name" style="color:var(--text2)">READER</div>
+      <div class="role-desc">Default semua user baru. Bisa baca, komentar, follow, dan melaporkan konten.</div>
+      <div class="role-perms">
+        <span class="perm-chip">read</span>
+        <span class="perm-chip">comment</span>
+        <span class="perm-chip">follow</span>
+        <span class="perm-chip">report_content</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-bottom:24px">
+    <div>
+      <h3>Admin Portal Architecture</h3>
+      <div class="arch-layer layer-client" style="margin-bottom:8px">
+        <div class="arch-layer-header">🔴 admin.maribaca.com — Next.js Admin UI</div>
+        <div class="arch-layer-body">
+          <span class="arch-chip">Dashboard Statistik</span>
+          <span class="arch-chip">User Management</span>
+          <span class="arch-chip">Report Queue</span>
+          <span class="arch-chip">Audit Log Viewer</span>
+          <span class="arch-chip">Novel/Chapter Review</span>
+          <span class="arch-chip">SuperAdmin Panel</span>
+        </div>
+      </div>
+      <div style="text-align:center;color:var(--text3);margin:4px">↕</div>
+      <div class="arch-layer layer-api" style="margin-bottom:8px">
+        <div class="arch-layer-header">🔐 Admin JWT Middleware (scope: admin)</div>
+        <div class="arch-layer-body">
+          <span class="arch-chip">requireAdmin()</span>
+          <span class="arch-chip">requireSuperAdmin()</span>
+          <span class="arch-chip">Admin audit log injection</span>
+        </div>
+      </div>
+      <div style="text-align:center;color:var(--text3);margin:4px">↕</div>
+      <div class="arch-layer layer-service">
+        <div class="arch-layer-header">⚙ AdminService + ModerationService</div>
+        <div class="arch-layer-body">
+          <span class="arch-chip">banUser()</span>
+          <span class="arch-chip">removeContent()</span>
+          <span class="arch-chip">reviewReport()</span>
+          <span class="arch-chip">assignAdminRole()</span>
+          <span class="arch-chip">logAction()</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3>Alur Moderasi Konten</h3>
+      <div class="flow-diagram" style="padding:12px 0">
+        <div class="flow-node fn-start" style="font-size:12px">👤 User klik "Laporkan"</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-action" style="font-size:12px">POST /comments/{`id`}/report<br><small>Pilih alasan: spam, SARA, 18+, dll</small></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-data" style="font-size:12px">content_reports dibuat<br><small>status: PENDING</small></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-action" style="font-size:12px">Notif ke Admin Panel<br><small>Badge merah di antrian laporan</small></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-action" style="font-size:12px">Admin review laporan<br><small>Lihat konten asli + riwayat user</small></div>
+        <div class="flow-arrow">↓</div>
+        <div style="display:flex;gap:10px;width:100%;justify-content:center">
+          <div class="flow-node fn-outcome" style="min-width:110px;font-size:11px">✅ Tolak laporan<br><small>Konten aman</small></div>
+          <div class="flow-node fn-end" style="min-width:110px;font-size:11px">🚫 Setujui<br><small>Hapus + notif user</small></div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-data" style="font-size:12px">Semua aksi tercatat di admin_logs<br><small>Tidak bisa dihapus (audit trail)</small></div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Peraturan Platform yang Dimoderasi Admin</h3>
+  <div class="rules-table">
+    <table>
+      <thead><tr><th>Kategori Pelanggaran</th><th>Contoh</th><th>Tindakan Default</th><th>Eskalasi</th></tr></thead>
+      <tbody>
+        <tr><td>Konten Dewasa Tanpa Label</td><td>Adegan eksplisit tanpa tag 18+</td><td>Unpublish chapter + peringatan</td><td>3× = ban akun</td></tr>
+        <tr><td>Ujaran Kebencian / SARA</td><td>Konten rasis, diskriminatif</td><td>Hapus konten + suspend 7 hari</td><td>Permanent ban</td></tr>
+        <tr><td>Spam &amp; Self-Promotion Berlebihan</td><td>Komentar iklan di chapter orang lain</td><td>Hapus komentar + peringatan</td><td>Mute 30 hari</td></tr>
+        <tr><td>Plagiarisme</td><td>Salin karya orang lain tanpa izin</td><td>Takedown novel + notifikasi</td><td>Ban akun</td></tr>
+        <tr><td>Konten Kekerasan Ekstrem</td><td>Deskripsi kekerasan sadis berlebihan</td><td>Review manual oleh SuperAdmin</td><td>Hapus + ban</td></tr>
+        <tr><td>Informasi Palsu / Berbahaya</td><td>Panduan berbahaya dibungkus fiksi</td><td>Hapus + lapor ke SuperAdmin</td><td>Permanent ban</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║   TAB i18n & TEMA                            ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<section id="tab-i18n" class="tab-section">
+  <div class="section-title">Internasionalisasi (i18n) &amp; Sistem Tema</div>
+  <div class="section-desc">Bahasa Indonesia &amp; English · Light &amp; Dark Mode · Preferensi tersimpan per-user</div>
+
+  <div class="grid2" style="margin-bottom:28px">
+
+    <div>
+      <h3>🌐 i18n — next-i18next</h3>
+      <div class="info-box info-teal">
+        <span>📌</span>
+        <span>Default bahasa: <strong>Indonesia (id)</strong>. Pengguna bisa switch ke English kapan saja. Preferensi tersimpan di cookie + profil user (jika login).</span>
+      </div>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">json</span><span class="code-filename">public/locales/id/common.json</span></div>
+        <pre>{
+  <span class="str">"nav"</span>: {
+    <span class="str">"home"</span>: <span class="str">"Beranda"</span>,
+    <span class="str">"browse"</span>: <span class="str">"Jelajahi"</span>,
+    <span class="str">"write"</span>: <span class="str">"Tulis Novel"</span>,
+    <span class="str">"login"</span>: <span class="str">"Masuk"</span>,
+    <span class="str">"register"</span>: <span class="str">"Daftar"</span>
+  },
+  <span class="str">"reader"</span>: {
+    <span class="str">"nextChapter"</span>: <span class="str">"Chapter Berikutnya"</span>,
+    <span class="str">"prevChapter"</span>: <span class="str">"Chapter Sebelumnya"</span>,
+    <span class="str">"progress"</span>: <span class="str">"Progress baca: {{pct}}%"</span>
+  },
+  <span class="str">"donate"</span>: {
+    <span class="str">"supportWriter"</span>: <span class="str">"Dukung Penulis"</span>,
+    <span class="str">"supportPlatform"</span>: <span class="str">"Dukung MariBaca"</span>
+  }
+}</pre>
+      </div>
+      <div class="code-block" style="margin-top:8px">
+        <div class="code-header"><span class="code-lang">json</span><span class="code-filename">public/locales/en/common.json</span></div>
+        <pre>{
+  <span class="str">"nav"</span>: {
+    <span class="str">"home"</span>: <span class="str">"Home"</span>,
+    <span class="str">"browse"</span>: <span class="str">"Browse"</span>,
+    <span class="str">"write"</span>: <span class="str">"Write Novel"</span>,
+    <span class="str">"login"</span>: <span class="str">"Sign In"</span>,
+    <span class="str">"register"</span>: <span class="str">"Sign Up"</span>
+  },
+  <span class="str">"reader"</span>: {
+    <span class="str">"nextChapter"</span>: <span class="str">"Next Chapter"</span>,
+    <span class="str">"prevChapter"</span>: <span class="str">"Previous Chapter"</span>,
+    <span class="str">"progress"</span>: <span class="str">"Reading progress: {{pct}}%"</span>
+  }
+}</pre>
+      </div>
+
+      <div style="margin-top:12px">
+        <h3>Struktur i18n di Frontend</h3>
+        <div class="tree">
+<div class="tree-line"><span class="tree-folder">public/locales/</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">id/</span><span class="tree-comment"> &nbsp;# Bahasa Indonesia (default)</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-json">common.json</span><span class="tree-comment"> &nbsp;# Layout, nav, umum</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-json">reader.json</span><span class="tree-comment"> &nbsp;# Halaman baca</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-json">auth.json</span><span class="tree-comment"> &nbsp;# Login, register</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-json">dashboard.json</span><span class="tree-comment"> &nbsp;# Area penulis</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-file-json">donate.json</span><span class="tree-comment"> &nbsp;# Halaman donasi</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-folder">en/</span><span class="tree-comment"> &nbsp;# English</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-json">common.json</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-json">reader.json</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-json">auth.json</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-json">dashboard.json</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-file-json">donate.json</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3>🌙 Light &amp; Dark Mode — Tailwind CSS</h3>
+      <div class="info-box info-purple">
+        <span>💡</span>
+        <span>Gunakan <code style="font-family:monospace;font-size:11px">class strategy</code> di Tailwind. Toggle dengan menambah/hapus class <code style="font-family:monospace;font-size:11px">dark</code> di tag <code style="font-family:monospace;font-size:11px">&lt;html&gt;</code>. Preferensi tersimpan di <code style="font-family:monospace;font-size:11px">localStorage</code> dan cookie.</span>
+      </div>
+
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">js</span><span class="code-filename">tailwind.config.js</span></div>
+        <pre><span class="kw">module</span>.exports = {
+  darkMode: <span class="str">'class'</span>, <span class="cm">// toggle with .dark class</span>
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          <span class="num">500</span>: <span class="str">'#7c5cfc'</span>, <span class="cm">// MariBaca purple</span>
+          <span class="num">600</span>: <span class="str">'#6b49e8'</span>,
+        },
+        accent: {
+          <span class="num">500</span>: <span class="str">'#0fb8a0'</span>, <span class="cm">// MariBaca teal</span>
+        }
+      }
+    }
+  }
+}</pre>
+      </div>
+
+      <div class="code-block" style="margin-top:8px">
+        <div class="code-header"><span class="code-lang">tsx</span><span class="code-filename">hooks/useTheme.ts</span></div>
+        <pre><span class="kw">export const</span> <span class="fn">useTheme</span> = () =&gt; {
+  <span class="kw">const</span> [theme, setTheme] = <span class="fn">useState</span>&lt;<span class="str">'light'</span> | <span class="str">'dark'</span>&gt;(
+    () =&gt; localStorage.getItem(<span class="str">'theme'</span>) <span class="kw">as</span> <span class="ty">any</span> || <span class="str">'dark'</span>
+  )
+
+  <span class="kw">const</span> <span class="fn">toggle</span> = () =&gt; {
+    <span class="kw">const</span> next = theme === <span class="str">'dark'</span> ? <span class="str">'light'</span> : <span class="str">'dark'</span>
+    setTheme(next)
+    localStorage.setItem(<span class="str">'theme'</span>, next)
+    document.documentElement.classList.toggle(<span class="str">'dark'</span>)
+  }
+  <span class="kw">return</span> { theme, toggle }
+}</pre>
+      </div>
+
+      <div style="margin-top:16px">
+        <h3>Perbandingan Tema</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="background:#080c14;border:1px solid #2a3a56;border-radius:10px;padding:14px">
+            <div style="font-size:10px;color:#7a92b4;margin-bottom:8px;font-family:monospace">🌙 DARK MODE (default)</div>
+            <div style="background:linear-gradient(135deg,#7c5cfc,#0fb8a0);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:Syne,sans-serif;font-weight:800;font-size:16px">MariBaca</div>
+            <div style="color:#b8cce0;font-size:11px;margin-top:6px">Latar gelap, nyaman di malam hari. Default untuk semua pembaca baru.</div>
+          </div>
+          <div style="background:#f8f9fc;border:1px solid #dde2ef;border-radius:10px;padding:14px">
+            <div style="font-size:10px;color:#7a92b4;margin-bottom:8px;font-family:monospace">☀ LIGHT MODE</div>
+            <div style="background:linear-gradient(135deg,#7c5cfc,#0fb8a0);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:Syne,sans-serif;font-weight:800;font-size:16px">MariBaca</div>
+            <div style="color:#3a4a6a;font-size:11px;margin-top:6px">Latar terang, nyaman siang hari. Bisa dipilih di setting reader.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Tech Dependencies Baru</h3>
+  <div class="grid4">
+    <div class="stack-card"><div class="stack-name" style="color:var(--teal2)">next-i18next</div><div class="stack-ver">latest</div><div class="stack-desc">i18n framework untuk Next.js App Router. JSON-based translations, SSR support.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--purple2)">react-i18next</div><div class="stack-ver">latest</div><div class="stack-desc">Hook useTranslation untuk komponen React. Lazy load translation per namespace.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--amber2)">next-themes</div><div class="stack-ver">latest</div><div class="stack-desc">Theme provider untuk Next.js. Mengatasi hydration mismatch untuk dark/light mode.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--green2)">Midtrans Node</div><div class="stack-ver">latest</div><div class="stack-desc">Payment gateway Indonesia untuk platform revenue. QRIS, transfer, e-wallet.</div></div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║   TAB STRUKTUR (existing, renumbered)        ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<section id="tab-struktur" class="tab-section">
+  <div class="section-title">Struktur Direktori Proyek</div>
+  <div class="section-desc">Clean Architecture · Full-stack Monorepo · Frontend terpisah dari Backend</div>
+
+  <div class="info-box info-purple">
+    <span>💡</span>
+    <span>Gunakan VSCode Workspace dengan dua folder root (<code style="font-family:monospace;font-size:11px;">frontend/</code> dan <code style="font-family:monospace;font-size:11px;">backend/</code>) agar IntelliSense TypeScript bekerja optimal di kedua project sekaligus.</span>
+  </div>
+
+  <div class="grid2" style="gap:24px">
+    <div>
+      <h3>Frontend — Next.js App</h3>
+      <div class="tree">
+<div class="tree-line"><span class="tree-folder">frontend/</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">public/</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-json">manifest.json</span><span class="tree-comment"> &nbsp;# PWA manifest</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">icons/</span><span class="tree-comment"> &nbsp;# 192px, 512px</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-folder">locales/</span><span class="tree-comment"> &nbsp;# i18n translations</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">id/</span><span class="tree-comment"> &nbsp;# Bahasa Indonesia</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-folder">en/</span><span class="tree-comment"> &nbsp;# English</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">src/</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">app/</span><span class="tree-comment"> &nbsp;# App Router</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">(auth)/</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-tsx">login/page.tsx</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-file-tsx">register/page.tsx</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">(main)/</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-tsx">layout.tsx</span><span class="tree-comment"> &nbsp;# Navbar global</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-tsx">page.tsx</span><span class="tree-comment"> &nbsp;# Homepage</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">browse/page.tsx</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">novel/[slug]/</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-tsx">page.tsx</span><span class="tree-comment"> &nbsp;# Detail novel</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-file-tsx">chapter/[num]/page.tsx</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-folder">author/[username]/page.tsx</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-folder">dashboard/</span><span class="tree-comment"> &nbsp;# Area penulis</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-tsx">page.tsx</span><span class="tree-comment"> &nbsp;# Overview stats</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">novel/new/page.tsx</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">novel/[id]/chapter/new/</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-folder">settings/page.tsx</span></div>
+<div class="tree-line">&nbsp;</div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">components/</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">ui/</span><span class="tree-comment"> &nbsp;# Button, Input, Modal</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">novel/</span><span class="tree-comment"> &nbsp;# NovelCard, Grid</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">reader/</span><span class="tree-comment"> &nbsp;# ChapterContent</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">editor/</span><span class="tree-comment"> &nbsp;# TipTap wrapper</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">donation/</span><span class="tree-comment"> &nbsp;# DonationPanel</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-folder">layout/</span><span class="tree-comment"> &nbsp;# Navbar, Footer</span></div>
+<div class="tree-line">&nbsp;</div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">hooks/</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-ts">useNovels.ts</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-ts">useChapter.ts</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-ts">useAuth.ts</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-ts">useReadingProgress.ts</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-file-ts">useTheme.ts</span><span class="tree-comment"> &nbsp;# Dark/Light toggle</span></div>
+<div class="tree-line">&nbsp;</div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">lib/</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-ts">api.ts</span><span class="tree-comment"> &nbsp;# Axios instance</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-ts">auth.ts</span><span class="tree-comment"> &nbsp;# NextAuth config</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-file-ts">utils.ts</span></div>
+<div class="tree-line">&nbsp;</div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-folder">store/</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-ts">useAuthStore.ts</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-file-ts">useReaderStore.ts</span></div>
+<div class="tree-line">&nbsp;</div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-json">next.config.js</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-json">tailwind.config.js</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-file-json">tsconfig.json</span></div>
+      </div>
+    </div>
+
+    <div>
+      <h3>Backend — Express.js API</h3>
+      <div class="tree">
+<div class="tree-line"><span class="tree-folder">backend/</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">src/</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">config/</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-ts">database.ts</span><span class="tree-comment"> &nbsp;# Prisma client</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-ts">redis.ts</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-ts">storage.ts</span><span class="tree-comment"> &nbsp;# R2 S3 SDK</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-file-ts">search.ts</span><span class="tree-comment"> &nbsp;# Meilisearch</span></div>
+<div class="tree-line">&nbsp;</div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">middleware/</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-ts">auth.ts</span><span class="tree-comment"> &nbsp;# Verify JWT</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-ts">rateLimiter.ts</span><span class="tree-comment"> &nbsp;# Redis</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-ts">upload.ts</span><span class="tree-comment"> &nbsp;# Multer config</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-ts">validate.ts</span><span class="tree-comment"> &nbsp;# Zod schemas</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-file-ts">errorHandler.ts</span></div>
+<div class="tree-line">&nbsp;</div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">routes/</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-ts">auth.routes.ts</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-ts">user.routes.ts</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-ts">novel.routes.ts</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-ts">chapter.routes.ts</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-ts">search.routes.ts</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-ts">admin.routes.ts</span><span class="tree-comment"> &nbsp;# Moderasi (ADMIN)</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-file-ts">superadmin.routes.ts</span><span class="tree-comment"> &nbsp;# Role mgmt (SUPERADMIN)</span></div>
+<div class="tree-line">&nbsp;</div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">controllers/</span><span class="tree-comment"> &nbsp;# HTTP handlers</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">services/</span><span class="tree-comment"> &nbsp;# Business logic</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">socket/</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-file-ts">index.ts</span><span class="tree-comment"> &nbsp;# Socket.io handlers</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">jobs/</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-file-ts">emailDigest.job.ts</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-file-ts">app.ts</span><span class="tree-comment"> &nbsp;# Express setup</span></div>
+<div class="tree-line">&nbsp;</div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-folder">prisma/</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-prisma">schema.prisma</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">├─ </span><span class="tree-file-ts">seed.ts</span></div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-folder">migrations/</span></div>
+<div class="tree-line">&nbsp;</div>
+<div class="tree-line"><span class="tree-indent"></span><span class="tree-conn">└─ </span><span class="tree-file-json">tsconfig.json</span></div>
+<div class="tree-line">&nbsp;</div>
+<div class="tree-line"><span class="tree-comment">── Root project files ──</span></div>
+<div class="tree-line"><span class="tree-file-json">docker-compose.yml</span><span class="tree-comment"> &nbsp;# Local dev</span></div>
+<div class="tree-line"><span class="tree-file-json">docker-compose.prod.yml</span></div>
+<div class="tree-line"><span class="tree-file-env">.env.example</span></div>
+<div class="tree-line"><span class="tree-file">README.md</span></div>
+      </div>
+
+      <div style="margin-top:16px">
+        <h3>VSCode Workspace Config</h3>
+        <div class="code-block">
+          <div class="code-header">
+            <span class="code-lang">json</span>
+            <span class="code-filename">webnovel.code-workspace</span>
+          </div>
+          <pre>{
+  <span class="str">"folders"</span>: [
+    { <span class="str">"path"</span>: <span class="str">"frontend"</span>, <span class="str">"name"</span>: <span class="str">"📱 Frontend"</span> },
+    { <span class="str">"path"</span>: <span class="str">"backend"</span>,  <span class="str">"name"</span>: <span class="str">"⚙ Backend"</span>  }
+  ],
+  <span class="str">"settings"</span>: {
+    <span class="str">"editor.formatOnSave"</span>: <span class="kw">true</span>,
+    <span class="str">"editor.defaultFormatter"</span>: <span class="str">"esbenp.prettier-vscode"</span>,
+    <span class="str">"typescript.preferences.importModuleSpecifier"</span>: <span class="str">"non-relative"</span>
+  },
+  <span class="str">"extensions"</span>: {
+    <span class="str">"recommendations"</span>: [
+      <span class="str">"dbaeumer.vscode-eslint"</span>,
+      <span class="str">"esbenp.prettier-vscode"</span>,
+      <span class="str">"prisma.prisma"</span>,
+      <span class="str">"bradlc.vscode-tailwindcss"</span>
+    ]
+  }
+}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║   TAB 2: ARSITEKTUR                          ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<section id="tab-arsitektur" class="tab-section">
+  <div class="section-title">Arsitektur Sistem</div>
+  <div class="section-desc">5-layer architecture · Separation of Concerns · Scalable dari MVP sampai production</div>
+
+  <div class="arch-arrow">↓ &nbsp; <span style="font-size:11px;color:var(--text3)">Request dari Browser / Mobile</span></div>
+
+  <div class="arch-layer layer-client">
+    <div class="arch-layer-header">🖥 &nbsp;Client Layer — Next.js 14 + PWA</div>
+    <div class="arch-layer-body">
+      <span class="arch-chip">App Router (SSR/SSG)</span>
+      <span class="arch-chip">TipTap Editor</span>
+      <span class="arch-chip">React Query</span>
+      <span class="arch-chip">Zustand Store</span>
+      <span class="arch-chip">NextAuth.js</span>
+      <span class="arch-chip">Tailwind CSS</span>
+      <span class="arch-chip">Service Worker</span>
+      <span class="arch-chip">qrcode.react</span>
+      <span class="arch-chip">Framer Motion</span>
+    </div>
+  </div>
+  <div class="arch-arrow">↕ &nbsp; <span style="font-size:11px;color:var(--text3)">HTTPS REST / WebSocket (Socket.io)</span></div>
+
+  <div class="arch-layer layer-api">
+    <div class="arch-layer-header">🌐 &nbsp;API Layer — Express.js + Middleware</div>
+    <div class="arch-layer-body">
+      <span class="arch-chip">JWT Auth Middleware</span>
+      <span class="arch-chip">Redis Rate Limiter</span>
+      <span class="arch-chip">Zod Validator</span>
+      <span class="arch-chip">Multer Upload</span>
+      <span class="arch-chip">CORS Config</span>
+      <span class="arch-chip">Error Handler</span>
+      <span class="arch-chip">Socket.io</span>
+    </div>
+  </div>
+  <div class="arch-arrow">↕</div>
+
+  <div class="arch-layer layer-service">
+    <div class="arch-layer-header">⚙ &nbsp;Service Layer — Business Logic</div>
+    <div class="arch-layer-body">
+      <span class="arch-chip">AuthService (JWT + bcrypt)</span>
+      <span class="arch-chip">NovelService</span>
+      <span class="arch-chip">ChapterService</span>
+      <span class="arch-chip">SearchService (Meilisearch sync)</span>
+      <span class="arch-chip">NotificationService</span>
+      <span class="arch-chip">StorageService (R2 upload)</span>
+      <span class="arch-chip">EmailService (Resend)</span>
+    </div>
+  </div>
+  <div class="arch-arrow">↕</div>
+
+  <div class="arch-layer layer-data">
+    <div class="arch-layer-header">🗄 &nbsp;Data Layer — Prisma ORM + Redis</div>
+    <div class="arch-layer-body">
+      <span class="arch-chip">PostgreSQL (primary DB)</span>
+      <span class="arch-chip">Prisma ORM</span>
+      <span class="arch-chip">Redis (cache + session)</span>
+      <span class="arch-chip">Meilisearch (full-text)</span>
+      <span class="arch-chip">Cloudflare R2 (files)</span>
+    </div>
+  </div>
+  <div class="arch-arrow">↕</div>
+
+  <div class="arch-layer layer-infra">
+    <div class="arch-layer-header">🚀 &nbsp;Infrastructure — Docker + Cloud</div>
+    <div class="arch-layer-body">
+      <span class="arch-chip">Docker Compose (local)</span>
+      <span class="arch-chip">Vercel (frontend)</span>
+      <span class="arch-chip">Railway (backend)</span>
+      <span class="arch-chip">GitHub Actions (CI/CD)</span>
+      <span class="arch-chip">Cloudflare CDN</span>
+      <span class="arch-chip">Sentry (monitoring)</span>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h3>Prinsip Arsitektur</h3>
+  <div class="grid3" style="margin-top:12px">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(124,92,252,0.15)">🔀</div>
+        <div><div class="card-title">Controller ≠ Service</div></div>
+      </div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.6">Controller hanya menangani HTTP request/response. Semua logika bisnis ada di Service layer. Controller tidak boleh langsung akses Prisma.</div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(15,184,160,0.12)">🔒</div>
+        <div><div class="card-title">Auth di Middleware</div></div>
+      </div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.6">JWT verification terjadi di middleware, bukan di controller. Route yang butuh auth cukup tambahkan <code style="font-family:monospace;font-size:11px">requireAuth</code> middleware.</div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(240,164,58,0.1)">📦</div>
+        <div><div class="card-title">Cache-First</div></div>
+      </div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.6">Novel populer, daftar genre, dan homepage data di-cache di Redis dengan TTL 5 menit. Kurangi beban PostgreSQL hingga 80%.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║   TAB 3: TECH STACK                          ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<section id="tab-stack" class="tab-section">
+  <div class="section-title">Tech Stack & Dependencies</div>
+  <div class="section-desc">Semua teknologi yang digunakan beserta versi dan fungsi spesifiknya</div>
+
+  <h3>Frontend</h3>
+  <div class="grid4" style="margin-bottom:28px">
+    <div class="stack-card"><div class="stack-name" style="color:var(--purple2)">Next.js</div><div class="stack-ver">v14+</div><div class="stack-desc">React framework dengan App Router, SSR, SSG, dan image optimization bawaan.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--blue2)">TypeScript</div><div class="stack-ver">v5+</div><div class="stack-desc">Type safety di seluruh codebase. Wajib untuk project skala menengah ke atas.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--teal2)">Tailwind CSS</div><div class="stack-ver">v3+</div><div class="stack-desc">Utility-first CSS. Tidak perlu tulis CSS custom untuk komponen umum.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--purple2)">TipTap</div><div class="stack-ver">v2+</div><div class="stack-desc">Rich text editor berbasis ProseMirror. Untuk nulis chapter novel dengan bold, italic, dll.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--amber2)">React Query</div><div class="stack-ver">v5+</div><div class="stack-desc">Server state management. Otomatis refetch, cache, dan loading state untuk API calls.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--teal2)">Zustand</div><div class="stack-ver">v4+</div><div class="stack-desc">Client state management yang ringan. Untuk auth state, reader preferences, dll.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--green2)">NextAuth.js</div><div class="stack-ver">v4+</div><div class="stack-desc">Authentication lengkap. Support Google OAuth, Discord, dan login email/password.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--pink)">next-pwa</div><div class="stack-ver">latest</div><div class="stack-desc">Progressive Web App. Bisa diinstall di HP, baca offline, dan push notifikasi.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--green2)">qrcode.react</div><div class="stack-ver">latest</div><div class="stack-desc">Generate QR code untuk wallet crypto penulis. Zero backend, pure frontend.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--purple3)">Framer Motion</div><div class="stack-ver">v11+</div><div class="stack-desc">Animasi React yang mudah. Page transitions, card hover, loading states.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--blue2)">Axios</div><div class="stack-ver">v1+</div><div class="stack-desc">HTTP client dengan interceptors untuk auto-attach JWT dan handle 401 errors.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--amber2)">Zod</div><div class="stack-ver">v3+</div><div class="stack-desc">Runtime type validation di frontend. Validasi form sebelum dikirim ke API.</div></div>
+  </div>
+
+  <h3>Backend</h3>
+  <div class="grid4" style="margin-bottom:28px">
+    <div class="stack-card"><div class="stack-name" style="color:var(--green2)">Node.js</div><div class="stack-ver">v20 LTS</div><div class="stack-desc">JavaScript runtime. Gunakan versi LTS untuk stability di production.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--teal2)">Express.js</div><div class="stack-ver">v4+</div><div class="stack-desc">HTTP framework ringan. Routing, middleware, dan error handling yang fleksibel.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--purple2)">Prisma ORM</div><div class="stack-ver">v5+</div><div class="stack-desc">Type-safe database client untuk PostgreSQL. Auto-generate types dari schema.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--pink)">Socket.io</div><div class="stack-ver">v4+</div><div class="stack-desc">WebSocket untuk notifikasi real-time dan komentar live di chapter.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--amber2)">JWT + bcrypt</div><div class="stack-ver">latest</div><div class="stack-desc">Autentikasi stateless. Access token 15 menit + refresh token 30 hari.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--blue2)">Zod</div><div class="stack-ver">v3+</div><div class="stack-desc">Validasi semua body request sebelum masuk ke controller. Cegah invalid data.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--green2)">Multer</div><div class="stack-ver">latest</div><div class="stack-desc">Middleware upload file. Untuk cover novel dan foto profil penulis.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--teal2)">node-cron</div><div class="stack-ver">latest</div><div class="stack-desc">Scheduled jobs. Kirim email digest notifikasi chapter baru tiap minggu.</div></div>
+  </div>
+
+  <h3>Database & Storage</h3>
+  <div class="grid4" style="margin-bottom:28px">
+    <div class="stack-card"><div class="stack-name" style="color:var(--blue2)">PostgreSQL</div><div class="stack-ver">v15+</div><div class="stack-desc">Database relasional utama. Users, novels, chapters, comments, semua tersimpan di sini.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--red)">Redis</div><div class="stack-ver">v7+</div><div class="stack-desc">Cache layer. Session management, rate limiting, leaderboard, trending novels.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--amber2)">Meilisearch</div><div class="stack-ver">v1+</div><div class="stack-desc">Full-text search yang cepat. Cari judul, author, genre, dan tag secara instan.</div></div>
+    <div class="stack-card"><div class="stack-name" style="color:var(--green2)">Cloudflare R2</div><div class="stack-ver">—</div><div class="stack-desc">Object storage untuk cover novel dan avatar. Lebih murah dari AWS S3 (no egress fee).</div></div>
+  </div>
+
+  <h3>Docker Compose — Local Development</h3>
+  <div class="code-block">
+    <div class="code-header">
+      <span class="code-lang">yaml</span>
+      <span class="code-filename">docker-compose.yml</span>
+    </div>
+    <pre><span class="kw">version</span>: <span class="str">'3.8'</span>
+<span class="kw">services</span>:
+  <span class="fn">postgres</span>:
+    image: <span class="str">postgres:15-alpine</span>
+    environment:
+      POSTGRES_DB: webnovel_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports: [<span class="str">"5432:5432"</span>]
+    volumes: [postgres_data:/var/lib/postgresql/data]
+
+  <span class="fn">redis</span>:
+    image: <span class="str">redis:7-alpine</span>
+    ports: [<span class="str">"6379:6379"</span>]
+
+  <span class="fn">meilisearch</span>:
+    image: <span class="str">getmeili/meilisearch:v1.6</span>
+    ports: [<span class="str">"7700:7700"</span>]
+    environment:
+      MEILI_MASTER_KEY: <span class="str">your_master_key</span>
+    volumes: [meili_data:/meili_data]</pre>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║   TAB 4: DATABASE SCHEMA                     ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<section id="tab-database" class="tab-section">
+  <div class="section-title">Database Schema</div>
+  <div class="section-desc">PostgreSQL · Prisma ORM · 10 tabel · Relasi lengkap</div>
+
+  <div class="info-box info-teal">
+    <span>📌</span>
+    <span>Semua tabel menggunakan UUID sebagai primary key untuk keamanan dan portabilitas. Field <code style="font-family:monospace;font-size:11px">createdAt</code> / <code style="font-family:monospace;font-size:11px">updatedAt</code> otomatis diisi oleh Prisma.</span>
+  </div>
+
+  <div class="grid3" style="margin-bottom:20px">
+    <div class="db-table">
+      <div class="db-table-header" style="background:rgba(124,92,252,0.1);color:var(--purple3)">👤 users</div>
+      <div class="db-field"><span class="field-name">id</span><span class="field-type">String</span><span class="field-pk">PK · UUID</span></div>
+      <div class="db-field"><span class="field-name">email</span><span class="field-type">String</span><span class="field-pk">UNIQUE</span></div>
+      <div class="db-field"><span class="field-name">username</span><span class="field-type">String</span><span class="field-pk">UNIQUE</span></div>
+      <div class="db-field"><span class="field-name">displayName</span><span class="field-type">String?</span><span class="field-opt">nullable</span></div>
+      <div class="db-field"><span class="field-name">passwordHash</span><span class="field-type">String?</span><span class="field-opt">OAuth=null</span></div>
+      <div class="db-field"><span class="field-name">avatarUrl</span><span class="field-type">String?</span><span class="field-opt">nullable</span></div>
+      <div class="db-field"><span class="field-name">bio</span><span class="field-type">String?</span><span class="field-opt">nullable</span></div>
+      <div class="db-field"><span class="field-name">role</span><span class="field-type">Role</span><span class="field-opt">READER</span></div>
+      <div class="db-field"><span class="field-name">isVerified</span><span class="field-type">Boolean</span><span class="field-opt">false</span></div>
+      <div class="db-field"><span class="field-name">isBanned</span><span class="field-type">Boolean</span><span class="field-opt">false</span></div>
+      <div class="db-field"><span class="field-name">banReason</span><span class="field-type">String?</span><span class="field-opt">nullable</span></div>
+      <div class="db-field"><span class="field-name">preferredLang</span><span class="field-type">String</span><span class="field-opt">"id"</span></div>
+      <div class="db-field"><span class="field-name">createdAt</span><span class="field-type">DateTime</span><span class="field-opt">auto</span></div>
+    </div>
+
+    <div class="db-table">
+      <div class="db-table-header" style="background:rgba(15,184,160,0.1);color:var(--teal2)">📖 novels</div>
+      <div class="db-field"><span class="field-name">id</span><span class="field-type">String</span><span class="field-pk">PK · UUID</span></div>
+      <div class="db-field"><span class="field-name">slug</span><span class="field-type">String</span><span class="field-pk">UNIQUE</span></div>
+      <div class="db-field"><span class="field-name">title</span><span class="field-type">String</span><span></span></div>
+      <div class="db-field"><span class="field-name">synopsis</span><span class="field-type">Text</span><span></span></div>
+      <div class="db-field"><span class="field-name">coverUrl</span><span class="field-type">String?</span><span class="field-opt">nullable</span></div>
+      <div class="db-field"><span class="field-name">status</span><span class="field-type">NovelStatus</span><span class="field-opt">ONGOING</span></div>
+      <div class="db-field"><span class="field-name">language</span><span class="field-type">String</span><span class="field-opt">"id"</span></div>
+      <div class="db-field"><span class="field-name">authorId</span><span class="field-type">String</span><span class="field-fk">FK → users</span></div>
+      <div class="db-field"><span class="field-name">viewCount</span><span class="field-type">Int</span><span class="field-opt">0</span></div>
+      <div class="db-field"><span class="field-name">updatedAt</span><span class="field-type">DateTime</span><span class="field-opt">auto</span></div>
+    </div>
+
+    <div class="db-table">
+      <div class="db-table-header" style="background:rgba(240,164,58,0.1);color:var(--amber2)">📄 chapters</div>
+      <div class="db-field"><span class="field-name">id</span><span class="field-type">String</span><span class="field-pk">PK · UUID</span></div>
+      <div class="db-field"><span class="field-name">novelId</span><span class="field-type">String</span><span class="field-fk">FK → novels</span></div>
+      <div class="db-field"><span class="field-name">title</span><span class="field-type">String</span><span></span></div>
+      <div class="db-field"><span class="field-name">content</span><span class="field-type">Text</span><span class="field-opt">HTML TipTap</span></div>
+      <div class="db-field"><span class="field-name">chapterNum</span><span class="field-type">Float</span><span class="field-opt">1, 2.5, dst</span></div>
+      <div class="db-field"><span class="field-name">wordCount</span><span class="field-type">Int</span><span class="field-opt">0</span></div>
+      <div class="db-field"><span class="field-name">isPublished</span><span class="field-type">Boolean</span><span class="field-opt">false</span></div>
+      <div class="db-field"><span class="field-name">publishedAt</span><span class="field-type">DateTime?</span><span class="field-opt">nullable</span></div>
+      <div class="db-field"><span class="field-name">createdAt</span><span class="field-type">DateTime</span><span class="field-opt">auto</span></div>
+    </div>
+
+    <div class="db-table">
+      <div class="db-table-header" style="background:rgba(58,156,252,0.1);color:var(--blue2)">💬 comments</div>
+      <div class="db-field"><span class="field-name">id</span><span class="field-type">String</span><span class="field-pk">PK</span></div>
+      <div class="db-field"><span class="field-name">content</span><span class="field-type">String</span><span></span></div>
+      <div class="db-field"><span class="field-name">userId</span><span class="field-type">String</span><span class="field-fk">FK → users</span></div>
+      <div class="db-field"><span class="field-name">novelId</span><span class="field-type">String?</span><span class="field-fk">FK nullable</span></div>
+      <div class="db-field"><span class="field-name">chapterId</span><span class="field-type">String?</span><span class="field-fk">FK nullable</span></div>
+      <div class="db-field"><span class="field-name">parentId</span><span class="field-type">String?</span><span class="field-fk">FK self (reply)</span></div>
+      <div class="db-field"><span class="field-name">createdAt</span><span class="field-type">DateTime</span><span class="field-opt">auto</span></div>
+    </div>
+
+    <div class="db-table">
+      <div class="db-table-header" style="background:rgba(34,201,126,0.1);color:var(--green2)">💸 donation_links</div>
+      <div class="db-field"><span class="field-name">id</span><span class="field-type">String</span><span class="field-pk">PK</span></div>
+      <div class="db-field"><span class="field-name">userId</span><span class="field-type">String</span><span class="field-pk">UNIQUE FK</span></div>
+      <div class="db-field"><span class="field-name">buymeacoffee</span><span class="field-type">String?</span><span class="field-opt">URL</span></div>
+      <div class="db-field"><span class="field-name">trakteer</span><span class="field-type">String?</span><span class="field-opt">URL</span></div>
+      <div class="db-field"><span class="field-name">paypal</span><span class="field-type">String?</span><span class="field-opt">paypal.me link</span></div>
+      <div class="db-field"><span class="field-name">saweria</span><span class="field-type">String?</span><span class="field-opt">URL</span></div>
+      <div class="db-field"><span class="field-name">ethWallet</span><span class="field-type">String?</span><span class="field-opt">0x...</span></div>
+      <div class="db-field"><span class="field-name">usdtWallet</span><span class="field-type">String?</span><span class="field-opt">TRC20</span></div>
+      <div class="db-field"><span class="field-name">bankAccounts</span><span class="field-type">Json?</span><span class="field-opt">array</span></div>
+    </div>
+
+    <div class="db-table">
+      <div class="db-table-header" style="background:rgba(240,102,176,0.1);color:#ffb3e0">🔔 notifications</div>
+      <div class="db-field"><span class="field-name">id</span><span class="field-type">String</span><span class="field-pk">PK</span></div>
+      <div class="db-field"><span class="field-name">userId</span><span class="field-type">String</span><span class="field-fk">FK → users</span></div>
+      <div class="db-field"><span class="field-name">type</span><span class="field-type">NotifType</span><span></span></div>
+      <div class="db-field"><span class="field-name">title</span><span class="field-type">String</span><span></span></div>
+      <div class="db-field"><span class="field-name">message</span><span class="field-type">String</span><span></span></div>
+      <div class="db-field"><span class="field-name">link</span><span class="field-type">String?</span><span class="field-opt">nullable</span></div>
+      <div class="db-field"><span class="field-name">isRead</span><span class="field-type">Boolean</span><span class="field-opt">false</span></div>
+      <div class="db-field"><span class="field-name">createdAt</span><span class="field-type">DateTime</span><span class="field-opt">auto</span></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:24px">Tabel Admin & Moderasi (Baru)</h3>
+  <div class="grid3" style="margin-bottom:20px">
+    <div class="db-table">
+      <div class="db-table-header" style="background:rgba(240,84,79,0.1);color:#ff9e9b">🛡 content_reports</div>
+      <div class="db-field"><span class="field-name">id</span><span class="field-type">String</span><span class="field-pk">PK</span></div>
+      <div class="db-field"><span class="field-name">reporterId</span><span class="field-type">String</span><span class="field-fk">FK → users</span></div>
+      <div class="db-field"><span class="field-name">targetType</span><span class="field-type">String</span><span class="field-opt">novel/chapter/comment</span></div>
+      <div class="db-field"><span class="field-name">targetId</span><span class="field-type">String</span><span class="field-opt">UUID target</span></div>
+      <div class="db-field"><span class="field-name">reason</span><span class="field-type">String</span><span class="field-opt">kategori</span></div>
+      <div class="db-field"><span class="field-name">detail</span><span class="field-type">String?</span><span class="field-opt">nullable</span></div>
+      <div class="db-field"><span class="field-name">status</span><span class="field-type">String</span><span class="field-opt">PENDING</span></div>
+      <div class="db-field"><span class="field-name">reviewedBy</span><span class="field-type">String?</span><span class="field-fk">FK → users (admin)</span></div>
+      <div class="db-field"><span class="field-name">reviewedAt</span><span class="field-type">DateTime?</span><span class="field-opt">nullable</span></div>
+      <div class="db-field"><span class="field-name">createdAt</span><span class="field-type">DateTime</span><span class="field-opt">auto</span></div>
+    </div>
+
+    <div class="db-table">
+      <div class="db-table-header" style="background:rgba(240,84,79,0.1);color:#ff9e9b">📋 admin_logs</div>
+      <div class="db-field"><span class="field-name">id</span><span class="field-type">String</span><span class="field-pk">PK</span></div>
+      <div class="db-field"><span class="field-name">adminId</span><span class="field-type">String</span><span class="field-fk">FK → users</span></div>
+      <div class="db-field"><span class="field-name">action</span><span class="field-type">String</span><span class="field-opt">BAN_USER, DEL_NOVEL…</span></div>
+      <div class="db-field"><span class="field-name">targetType</span><span class="field-type">String</span><span class="field-opt">user/novel/etc</span></div>
+      <div class="db-field"><span class="field-name">targetId</span><span class="field-type">String</span><span class="field-opt">UUID</span></div>
+      <div class="db-field"><span class="field-name">note</span><span class="field-type">String?</span><span class="field-opt">alasan tindakan</span></div>
+      <div class="db-field"><span class="field-name">ipAddress</span><span class="field-type">String?</span><span class="field-opt">audit trail</span></div>
+      <div class="db-field"><span class="field-name">createdAt</span><span class="field-type">DateTime</span><span class="field-opt">auto</span></div>
+    </div>
+
+    <div class="db-table">
+      <div class="db-table-header" style="background:rgba(34,201,126,0.1);color:var(--green2)">💰 platform_revenue</div>
+      <div class="db-field"><span class="field-name">id</span><span class="field-type">String</span><span class="field-pk">PK</span></div>
+      <div class="db-field"><span class="field-name">type</span><span class="field-type">String</span><span class="field-opt">PREMIUM/ADS/BADGE/TIP</span></div>
+      <div class="db-field"><span class="field-name">userId</span><span class="field-type">String?</span><span class="field-fk">FK → users (nullable)</span></div>
+      <div class="db-field"><span class="field-name">amount</span><span class="field-type">Decimal</span><span class="field-opt">IDR</span></div>
+      <div class="db-field"><span class="field-name">currency</span><span class="field-type">String</span><span class="field-opt">IDR</span></div>
+      <div class="db-field"><span class="field-name">description</span><span class="field-type">String?</span><span class="field-opt">nullable</span></div>
+      <div class="db-field"><span class="field-name">status</span><span class="field-type">String</span><span class="field-opt">PENDING/PAID</span></div>
+      <div class="db-field"><span class="field-name">createdAt</span><span class="field-type">DateTime</span><span class="field-opt">auto</span></div>
+    </div>
+
+  <div class="grid2">
+    <div>
+      <h3>Enum Types</h3>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">prisma</span><span class="code-filename">schema.prisma — enums</span></div>
+        <pre><span class="kw">enum</span> <span class="ty">Role</span> {
+  READER      <span class="cm">// Default semua user baru</span>
+  AUTHOR      <span class="cm">// Bisa buat &amp; publish novel</span>
+  ADMIN       <span class="cm">// Moderasi konten &amp; user</span>
+  SUPERADMIN  <span class="cm">// Bisa assign/revoke role ADMIN</span>
+}
+
+<span class="kw">enum</span> <span class="ty">NovelStatus</span> {
+  ONGOING    <span class="cm">// Masih update</span>
+  COMPLETED  <span class="cm">// Tamat</span>
+  HIATUS     <span class="cm">// Pause sementara</span>
+  DROPPED    <span class="cm">// Dihentikan</span>
+}
+
+<span class="kw">enum</span> <span class="ty">NotificationType</span> {
+  NEW_CHAPTER   <span class="cm">// Chapter baru</span>
+  NEW_COMMENT   <span class="cm">// Ada komentar</span>
+  NEW_REPLY     <span class="cm">// Ada balasan</span>
+  NEW_FOLLOWER  <span class="cm">// Dapat follower</span>
+  SYSTEM        <span class="cm">// Dari admin/platform</span>
+  ADMIN_ACTION  <span class="cm">// Peringatan / tindakan admin</span>
+}
+
+<span class="kw">enum</span> <span class="ty">ContentStatus</span> {
+  ACTIVE    <span class="cm">// Konten aktif</span>
+  REPORTED  <span class="cm">// Dilaporkan, menunggu review</span>
+  REMOVED   <span class="cm">// Dihapus oleh admin</span>
+  APPEALING <span class="cm">// Sedang banding</span>
+}</pre>
+      </div>
+    </div>
+    <div>
+      <h3>Relasi Utama</h3>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">text</span><span class="code-filename">Diagram relasi</span></div>
+        <pre>users ──1:1──▶ donation_links
+users ──1:N──▶ novels
+users ──1:N──▶ comments
+users ──M:N──▶ novels (follows)
+users ──M:N──▶ users  (follows)
+users ──1:N──▶ notifications
+users ──1:N──▶ refresh_tokens
+
+novels ──1:N──▶ chapters
+novels ──M:N──▶ genres (novel_genres)
+novels ──M:N──▶ tags   (novel_tags)
+novels ──1:N──▶ comments
+
+chapters ──1:N──▶ comments
+chapters ──1:N──▶ reading_progress
+
+comments ──1:N──▶ comments (self-ref, replies)</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║   TAB 5: API ROUTES                          ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<section id="tab-api" class="tab-section">
+  <div class="section-title">API Routes</div>
+  <div class="section-desc">Base URL: <code style="font-family:monospace;background:var(--bg2);padding:2px 8px;border-radius:4px;font-size:12px">https://api.domain.com/v1</code> &nbsp;· REST · JSON</div>
+
+  <div style="display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap">
+    <span class="method m-get">GET</span><span style="font-size:12px;color:var(--text2)">Data retrieval, tidak ubah state</span>
+    <span style="margin:0 6px"></span>
+    <span class="method m-post">POST</span><span style="font-size:12px;color:var(--text2)">Buat resource baru</span>
+    <span style="margin:0 6px"></span>
+    <span class="method m-patch">PATCH</span><span style="font-size:12px;color:var(--text2)">Update sebagian field</span>
+    <span style="margin:0 6px"></span>
+    <span class="method m-delete">DELETE</span><span style="font-size:12px;color:var(--text2)">Hapus resource</span>
+  </div>
+
+  <div class="api-group">
+    <div class="api-group-title">🔐 Auth</div>
+    <div class="api-row"><span class="method m-post">POST</span><span class="api-path">/auth/register</span><span class="api-desc">Daftar akun baru dengan email + password</span><span class="api-auth"><span class="auth-chip auth-pub">public</span></span></div>
+    <div class="api-row"><span class="method m-post">POST</span><span class="api-path">/auth/login</span><span class="api-desc">Login, return access + refresh token</span><span class="api-auth"><span class="auth-chip auth-pub">public</span></span></div>
+    <div class="api-row"><span class="method m-post">POST</span><span class="api-path">/auth/refresh</span><span class="api-desc">Perbarui access token dengan refresh token</span><span class="api-auth"><span class="auth-chip auth-pub">public</span></span></div>
+    <div class="api-row"><span class="method m-delete">DEL</span><span class="api-path">/auth/logout</span><span class="api-desc">Hapus refresh token dari database</span><span class="api-auth"><span class="auth-chip auth-jwt">JWT</span></span></div>
+    <div class="api-row"><span class="method m-get">GET</span><span class="api-path">/auth/me</span><span class="api-desc">Info user yang sedang login</span><span class="api-auth"><span class="auth-chip auth-jwt">JWT</span></span></div>
+  </div>
+
+  <div class="api-group">
+    <div class="api-group-title">📖 Novel</div>
+    <div class="api-row"><span class="method m-get">GET</span><span class="api-path">/novels</span><span class="api-desc">Semua novel · filter: genre, status, sort</span><span class="api-auth"><span class="auth-chip auth-pub">public</span></span></div>
+    <div class="api-row"><span class="method m-get">GET</span><span class="api-path">/novels/trending</span><span class="api-desc">Novel trending minggu ini (cached Redis)</span><span class="api-auth"><span class="auth-chip auth-pub">public</span></span></div>
+    <div class="api-row"><span class="method m-get">GET</span><span class="api-path">/novels/latest</span><span class="api-desc">Novel dengan update terbaru</span><span class="api-auth"><span class="auth-chip auth-pub">public</span></span></div>
+    <div class="api-row"><span class="method m-get">GET</span><span class="api-path">/novels/:slug</span><span class="api-desc">Detail novel + daftar chapter</span><span class="api-auth"><span class="auth-chip auth-pub">public</span></span></div>
+    <div class="api-row"><span class="method m-post">POST</span><span class="api-path">/novels</span><span class="api-desc">Buat novel baru (role AUTHOR required)</span><span class="api-auth"><span class="auth-chip auth-jwt">JWT</span></span></div>
+    <div class="api-row"><span class="method m-patch">PATCH</span><span class="api-path">/novels/:id</span><span class="api-desc">Update info novel (hanya author)</span><span class="api-auth"><span class="auth-chip auth-own">owner</span></span></div>
+    <div class="api-row"><span class="method m-post">POST</span><span class="api-path">/novels/:id/cover</span><span class="api-desc">Upload cover novel ke R2 (multipart)</span><span class="api-auth"><span class="auth-chip auth-own">owner</span></span></div>
+    <div class="api-row"><span class="method m-delete">DEL</span><span class="api-path">/novels/:id</span><span class="api-desc">Hapus novel + semua chapter</span><span class="api-auth"><span class="auth-chip auth-own">owner</span></span></div>
+  </div>
+
+  <div class="api-group">
+    <div class="api-group-title">📄 Chapter</div>
+    <div class="api-row"><span class="method m-get">GET</span><span class="api-path">/novels/:id/chapters</span><span class="api-desc">Daftar semua chapter yang published</span><span class="api-auth"><span class="auth-chip auth-pub">public</span></span></div>
+    <div class="api-row"><span class="method m-get">GET</span><span class="api-path">/novels/:id/chapters/:num</span><span class="api-desc">Baca isi chapter (increment view)</span><span class="api-auth"><span class="auth-chip auth-pub">public</span></span></div>
+    <div class="api-row"><span class="method m-post">POST</span><span class="api-path">/novels/:id/chapters</span><span class="api-desc">Buat chapter baru (draft)</span><span class="api-auth"><span class="auth-chip auth-own">owner</span></span></div>
+    <div class="api-row"><span class="method m-patch">PATCH</span><span class="api-path">/chapters/:id</span><span class="api-desc">Edit isi / judul chapter</span><span class="api-auth"><span class="auth-chip auth-own">owner</span></span></div>
+    <div class="api-row"><span class="method m-patch">PATCH</span><span class="api-path">/chapters/:id/publish</span><span class="api-desc">Toggle publish / unpublish</span><span class="api-auth"><span class="auth-chip auth-own">owner</span></span></div>
+    <div class="api-row"><span class="method m-post">POST</span><span class="api-path">/chapters/:id/progress</span><span class="api-desc">Simpan posisi baca (scroll %)</span><span class="api-auth"><span class="auth-chip auth-jwt">JWT</span></span></div>
+  </div>
+
+  <div class="api-group">
+    <div class="api-group-title">👤 User</div>
+    <div class="api-row"><span class="method m-get">GET</span><span class="api-path">/users/:username</span><span class="api-desc">Profil publik + daftar novel penulis</span><span class="api-auth"><span class="auth-chip auth-pub">public</span></span></div>
+    <div class="api-row"><span class="method m-patch">PATCH</span><span class="api-path">/users/me</span><span class="api-desc">Update nama, bio, avatar</span><span class="api-auth"><span class="auth-chip auth-jwt">JWT</span></span></div>
+    <div class="api-row"><span class="method m-patch">PATCH</span><span class="api-path">/users/me/donation-links</span><span class="api-desc">Update semua link donasi</span><span class="api-auth"><span class="auth-chip auth-jwt">JWT</span></span></div>
+    <div class="api-row"><span class="method m-get">GET</span><span class="api-path">/users/me/notifications</span><span class="api-desc">Daftar notifikasi user</span><span class="api-auth"><span class="auth-chip auth-jwt">JWT</span></span></div>
+    <div class="api-row"><span class="method m-patch">PATCH</span><span class="api-path">/users/me/notifications/read</span><span class="api-desc">Tandai semua notif sebagai dibaca</span><span class="api-auth"><span class="auth-chip auth-jwt">JWT</span></span></div>
+  </div>
+
+  <div class="api-group">
+    <div class="api-group-title">� Follow · 🔍 Search</div>
+    <div class="api-row"><span class="method m-get">GET</span><span class="api-path">/novels/:id/comments</span><span class="api-desc">Komentar di halaman novel</span><span class="api-auth"><span class="auth-chip auth-pub">public</span></span></div>
+    <div class="api-row"><span class="method m-post">POST</span><span class="api-path">/comments</span><span class="api-desc">Buat komentar / reply</span><span class="api-auth"><span class="auth-chip auth-jwt">JWT</span></span></div>
+    <div class="api-row"><span class="method m-delete">DEL</span><span class="api-path">/comments/:id</span><span class="api-desc">Hapus komentar (hanya pemilik)</span><span class="api-auth"><span class="auth-chip auth-own">owner</span></span></div>
+    <div class="api-row"><span class="method m-get">GET</span><span class="api-path">/search?q=&amp;type=</span><span class="api-desc">Cari novel, author, tag via Meilisearch</span><span class="api-auth"><span class="auth-chip auth-pub">public</span></span></div>
+    <div class="api-row"><span class="method m-post">POST</span><span class="api-path">/follow/novel/:id</span><span class="api-desc">Follow novel (notif chapter baru)</span><span class="api-auth"><span class="auth-chip auth-jwt">JWT</span></span></div>
+    <div class="api-row"><span class="method m-delete">DEL</span><span class="api-path">/follow/novel/:id</span><span class="api-desc">Unfollow novel</span><span class="api-auth"><span class="auth-chip auth-jwt">JWT</span></span></div>
+  </div>
+
+  <div class="api-group">
+    <div class="api-group-title">🛡 Admin — Moderasi Konten (role: ADMIN / SUPERADMIN)</div>
+    <div class="api-row"><span class="method m-get">GET</span><span class="api-path">/admin/dashboard/stats</span><span class="api-desc">Statistik platform: user, novel, laporan aktif</span><span class="api-auth"><span class="auth-chip auth-admin" style="background:rgba(240,84,79,0.12);color:#ff9e9b;border:1px solid rgba(240,84,79,0.25)">ADMIN</span></span></div>
+    <div class="api-row"><span class="method m-get">GET</span><span class="api-path">/admin/users</span><span class="api-desc">Daftar semua user + filter/paginate</span><span class="api-auth"><span class="auth-chip auth-admin" style="background:rgba(240,84,79,0.12);color:#ff9e9b;border:1px solid rgba(240,84,79,0.25)">ADMIN</span></span></div>
+    <div class="api-row"><span class="method m-patch">PATCH</span><span class="api-path">/admin/users/:id/ban</span><span class="api-desc">Ban user + alasan (tercatat di admin_logs)</span><span class="api-auth"><span class="auth-chip auth-admin" style="background:rgba(240,84,79,0.12);color:#ff9e9b;border:1px solid rgba(240,84,79,0.25)">ADMIN</span></span></div>
+    <div class="api-row"><span class="method m-patch">PATCH</span><span class="api-path">/admin/users/:id/unban</span><span class="api-desc">Cabut ban user</span><span class="api-auth"><span class="auth-chip auth-admin" style="background:rgba(240,84,79,0.12);color:#ff9e9b;border:1px solid rgba(240,84,79,0.25)">ADMIN</span></span></div>
+    <div class="api-row"><span class="method m-delete">DEL</span><span class="api-path">/admin/novels/:id</span><span class="api-desc">Hapus novel paksa (pelanggaran)</span><span class="api-auth"><span class="auth-chip auth-admin" style="background:rgba(240,84,79,0.12);color:#ff9e9b;border:1px solid rgba(240,84,79,0.25)">ADMIN</span></span></div>
+    <div class="api-row"><span class="method m-delete">DEL</span><span class="api-path">/admin/comments/:id</span><span class="api-desc">Hapus komentar paksa</span><span class="api-auth"><span class="auth-chip auth-admin" style="background:rgba(240,84,79,0.12);color:#ff9e9b;border:1px solid rgba(240,84,79,0.25)">ADMIN</span></span></div>
+    <div class="api-row"><span class="method m-get">GET</span><span class="api-path">/admin/reports</span><span class="api-desc">Antrian laporan user (PENDING)</span><span class="api-auth"><span class="auth-chip auth-admin" style="background:rgba(240,84,79,0.12);color:#ff9e9b;border:1px solid rgba(240,84,79,0.25)">ADMIN</span></span></div>
+    <div class="api-row"><span class="method m-patch">PATCH</span><span class="api-path">/admin/reports/:id</span><span class="api-desc">Review laporan: approve/reject + tindakan</span><span class="api-auth"><span class="auth-chip auth-admin" style="background:rgba(240,84,79,0.12);color:#ff9e9b;border:1px solid rgba(240,84,79,0.25)">ADMIN</span></span></div>
+    <div class="api-row"><span class="method m-get">GET</span><span class="api-path">/admin/logs</span><span class="api-desc">Audit log semua aksi admin</span><span class="api-auth"><span class="auth-chip auth-admin" style="background:rgba(240,84,79,0.12);color:#ff9e9b;border:1px solid rgba(240,84,79,0.25)">ADMIN</span></span></div>
+  </div>
+
+  <div class="api-group">
+    <div class="api-group-title">👑 SuperAdmin — Manajemen Admin (role: SUPERADMIN only)</div>
+    <div class="api-row"><span class="method m-get">GET</span><span class="api-path">/superadmin/admins</span><span class="api-desc">Daftar semua user dengan role ADMIN</span><span class="api-auth"><span class="auth-chip" style="background:rgba(240,102,176,0.12);color:#ffb3e0;border:1px solid rgba(240,102,176,0.25);font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px">SUPER</span></span></div>
+    <div class="api-row"><span class="method m-patch">PATCH</span><span class="api-path">/superadmin/users/:id/promote</span><span class="api-desc">Naikkan role user menjadi ADMIN</span><span class="api-auth"><span class="auth-chip" style="background:rgba(240,102,176,0.12);color:#ffb3e0;border:1px solid rgba(240,102,176,0.25);font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px">SUPER</span></span></div>
+    <div class="api-row"><span class="method m-patch">PATCH</span><span class="api-path">/superadmin/users/:id/demote</span><span class="api-desc">Turunkan role ADMIN menjadi user biasa</span><span class="api-auth"><span class="auth-chip" style="background:rgba(240,102,176,0.12);color:#ffb3e0;border:1px solid rgba(240,102,176,0.25);font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px">SUPER</span></span></div>
+    <div class="api-row"><span class="method m-get">GET</span><span class="api-path">/superadmin/revenue</span><span class="api-desc">Data revenue platform keseluruhan</span><span class="api-auth"><span class="auth-chip" style="background:rgba(240,102,176,0.12);color:#ffb3e0;border:1px solid rgba(240,102,176,0.25);font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px">SUPER</span></span></div>
+    <div class="api-row"><span class="method m-patch">PATCH</span><span class="api-path">/superadmin/settings</span><span class="api-desc">Update konfigurasi global platform</span><span class="api-auth"><span class="auth-chip" style="background:rgba(240,102,176,0.12);color:#ffb3e0;border:1px solid rgba(240,102,176,0.25);font-family:monospace;font-size:10px;padding:2px 7px;border-radius:4px">SUPER</span></span></div>
+  </div>
+
+  <div class="api-group">
+    <div class="api-group-title">📊 Platform Revenue (Donasi ke MariBaca)</div>
+    <div class="api-row"><span class="method m-post">POST</span><span class="api-path">/platform/donate</span><span class="api-desc">Inisiasi donasi ke platform (redirect ke Midtrans)</span><span class="api-auth"><span class="auth-chip auth-pub">public</span></span></div>
+    <div class="api-row"><span class="method m-post">POST</span><span class="api-path">/platform/donate/callback</span><span class="api-desc">Webhook Midtrans (konfirmasi pembayaran)</span><span class="api-auth"><span class="auth-chip auth-pub">webhook</span></span></div>
+    <div class="api-row"><span class="method m-post">POST</span><span class="api-path">/platform/badge/purchase</span><span class="api-desc">Beli Badge Verified Author (premium)</span><span class="api-auth"><span class="auth-chip auth-jwt">JWT</span></span></div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║   TAB 6: ROADMAP                             ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<section id="tab-roadmap" class="tab-section">
+  <div class="section-title">Development Roadmap</div>
+  <div class="section-desc">9 Phase · MVP hingga Production-ready · ~4 bulan · Tiap phase 2 minggu, 6–8 task per phase</div>
+
+  <div class="info-box info-blue" style="margin-bottom:20px">
+    <span>ℹ</span>
+    <span><strong>Pendekatan:</strong> Setiap phase dirancang ringan dan fokus — maksimal 6–8 task per phase. Ini meminimalisir error, mempermudah review, dan memastikan setiap deliverable terverifikasi sebelum lanjut ke phase berikutnya. <em>Phase 1 selesai ✓ · Phase 2 sedang berjalan.</em></span>
+  </div>
+
+  <div class="roadmap">
+
+    <!-- PHASE 1 -->
+    <div class="phase-card phase-done">
+      <div class="phase-header">
+        <div>
+          <div class="phase-num">Phase 1 · Minggu 1–2</div>
+          <div class="phase-title">Project Setup & Infrastructure</div>
+        </div>
+        <span class="phase-status status-done">Done ✓</span>
+      </div>
+      <div class="task-grid">
+        <div class="task-list">
+          <div class="task task-done"><span class="check-done">✓</span>Init monorepo: <code>frontend/</code> + <code>backend/</code></div>
+          <div class="task task-done"><span class="check-done">✓</span>Docker Compose: PostgreSQL + Redis + Meilisearch</div>
+          <div class="task task-done"><span class="check-done">✓</span>Prisma schema v1 + migration awal</div>
+          <div class="task task-done"><span class="check-done">✓</span>Setup environment variables (.env + .env.example)</div>
+        </div>
+        <div class="task-list">
+          <div class="task task-done"><span class="check-done">✓</span>Cloudflare R2 bucket + adapter upload</div>
+          <div class="task task-done"><span class="check-done">✓</span>CI skeleton: lint + type-check pipeline</div>
+          <div class="task task-done"><span class="check-done">✓</span>Buat <code>plan.md</code>, <code>tasks.md</code>, <code>status.md</code></div>
+          <div class="task task-todo"><span class="check-todo">○</span>Deploy staging: Vercel (frontend) + Railway (backend)</div>
+        </div>
+      </div>
+      <div class="phase-chips">
+        <span class="badge badge-blue">Docker</span>
+        <span class="badge badge-amber">Prisma</span>
+        <span class="badge badge-green">R2</span>
+        <span class="badge badge-gray">CI</span>
+        <span class="badge badge-teal">Railway</span>
+        <span class="badge badge-purple">Vercel</span>
+      </div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="phase-card phase-active">
+      <div class="phase-header">
+        <div>
+          <div class="phase-num">Phase 2 · Minggu 3–4</div>
+          <div class="phase-title">Autentikasi & User System</div>
+        </div>
+        <span class="phase-status status-active">Next →</span>
+      </div>
+      <div class="task-grid">
+        <div class="task-list">
+          <div class="task task-todo"><span class="check-todo">○</span>Register + login (email/password, bcrypt)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>JWT access token + refresh token (httpOnly cookie)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Google OAuth via NextAuth.js</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Middleware auth: <code>requireAuth</code>, <code>requireRole</code></div>
+        </div>
+        <div class="task-list">
+          <div class="task task-todo"><span class="check-todo">○</span>Halaman login &amp; register (UI + validation)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Profile page: edit nama, bio, avatar (upload R2)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Rate limiting login endpoint (Redis)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Unit test: auth service (register, login, token refresh)</div>
+        </div>
+      </div>
+      <div class="phase-chips">
+        <span class="badge badge-gray">JWT</span>
+        <span class="badge badge-green">OAuth</span>
+        <span class="badge badge-red">Redis</span>
+        <span class="badge badge-blue">NextAuth</span>
+        <span class="badge badge-amber">bcrypt</span>
+      </div>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="phase-card phase-future">
+      <div class="phase-header">
+        <div>
+          <div class="phase-num">Phase 3 · Minggu 5–6</div>
+          <div class="phase-title">Novel & Chapter Core</div>
+        </div>
+        <span class="phase-status status-future">Planned</span>
+      </div>
+      <div class="task-grid">
+        <div class="task-list">
+          <div class="task task-todo"><span class="check-todo">○</span>CRUD Novel: buat, edit, hapus, ubah status</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Upload cover novel ke Cloudflare R2</div>
+          <div class="task task-todo"><span class="check-todo">○</span>CRUD Chapter + TipTap rich-text editor</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Halaman detail novel (info + daftar chapter)</div>
+        </div>
+        <div class="task-list">
+          <div class="task task-todo"><span class="check-todo">○</span>Halaman baca chapter (reader view, mobile-first)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Navigasi prev/next chapter</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Dashboard penulis: list novel + view count per novel</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Genre &amp; tag: seed data + relasi ke novel</div>
+        </div>
+      </div>
+      <div class="phase-chips">
+        <span class="badge badge-purple">TipTap</span>
+        <span class="badge badge-green">R2</span>
+        <span class="badge badge-teal">Express</span>
+        <span class="badge badge-blue">Next.js</span>
+        <span class="badge badge-amber">Prisma</span>
+      </div>
+    </div>
+
+    <!-- PHASE 4 -->
+    <div class="phase-card phase-future">
+      <div class="phase-header">
+        <div>
+          <div class="phase-num">Phase 4 · Minggu 7–8</div>
+          <div class="phase-title">Homepage, Explore & Search</div>
+        </div>
+        <span class="phase-status status-future">Planned</span>
+      </div>
+      <div class="task-grid">
+        <div class="task-list">
+          <div class="task task-todo"><span class="check-todo">○</span>Homepage: novel terbaru + populer + rekomendasi genre</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Halaman explore: browse by genre &amp; tag</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Full-text search novel &amp; chapter (Meilisearch)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Index Meilisearch: sync data novel saat create/update</div>
+        </div>
+        <div class="task-list">
+          <div class="task task-todo"><span class="check-todo">○</span>Trending novels (Redis sorted set leaderboard)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Halaman profil penulis publik</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Follow novel &amp; follow penulis</div>
+          <div class="task task-todo"><span class="check-todo">○</span>SEO dasar: meta tags, Open Graph, robots.txt</div>
+        </div>
+      </div>
+      <div class="phase-chips">
+        <span class="badge badge-amber">Meilisearch</span>
+        <span class="badge badge-red">Redis</span>
+        <span class="badge badge-purple">SEO</span>
+        <span class="badge badge-blue">Next.js SSR</span>
+      </div>
+    </div>
+
+    <!-- PHASE 5 -->
+    <div class="phase-card phase-future">
+      <div class="phase-header">
+        <div>
+          <div class="phase-num">Phase 5 · Minggu 9–10</div>
+          <div class="phase-title">Komunitas & Notifikasi</div>
+        </div>
+        <span class="phase-status status-future">Planned</span>
+      </div>
+      <div class="task-grid">
+        <div class="task-list">
+          <div class="task task-todo"><span class="check-todo">○</span>Sistem komentar pada chapter + nested reply</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Like/rating novel</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Reading progress otomatis (scroll-based, disimpan ke DB)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Bookmark chapter + halaman reading history</div>
+        </div>
+        <div class="task-list">
+          <div class="task task-todo"><span class="check-todo">○</span>Notifikasi in-app real-time (Socket.io)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Notifikasi: chapter baru dari novel yang di-follow</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Email notifikasi chapter baru (Resend + node-cron)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Sistem laporan konten (report button + form alasan)</div>
+        </div>
+      </div>
+      <div class="phase-chips">
+        <span class="badge badge-pink">Socket.io</span>
+        <span class="badge badge-teal">Resend</span>
+        <span class="badge badge-blue">PostgreSQL</span>
+        <span class="badge badge-amber">node-cron</span>
+      </div>
+    </div>
+
+    <!-- PHASE 6 -->
+    <div class="phase-card phase-future">
+      <div class="phase-header">
+        <div>
+          <div class="phase-num">Phase 6 · Minggu 11–12</div>
+          <div class="phase-title">i18n, Tema & PWA</div>
+        </div>
+        <span class="phase-status status-future">Planned</span>
+      </div>
+      <div class="task-grid">
+        <div class="task-list">
+          <div class="task task-todo"><span class="check-todo">○</span><strong>🌐 i18n:</strong> setup next-i18next + locale files (id + en)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Terjemahkan semua string UI ke key translation</div>
+          <div class="task task-todo"><span class="check-todo">○</span><strong>🌙 Dark/Light mode:</strong> next-themes + Tailwind dark: prefix</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Persist preferensi tema &amp; bahasa di cookie/localStorage</div>
+        </div>
+        <div class="task-list">
+          <div class="task task-todo"><span class="check-todo">○</span>Reader settings: ukuran font, spasi baris, tema baca</div>
+          <div class="task task-todo"><span class="check-todo">○</span>PWA: manifest.json + Service Worker (next-pwa)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Offline reading: cache chapter yang pernah dibuka</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Install-to-homescreen prompt (mobile)</div>
+        </div>
+      </div>
+      <div class="phase-chips">
+        <span class="badge badge-blue">i18n ID/EN</span>
+        <span class="badge badge-gray">Dark/Light</span>
+        <span class="badge badge-green">PWA</span>
+        <span class="badge badge-purple">next-themes</span>
+        <span class="badge badge-teal">next-pwa</span>
+      </div>
+    </div>
+
+    <!-- PHASE 7 -->
+    <div class="phase-card phase-future">
+      <div class="phase-header">
+        <div>
+          <div class="phase-num">Phase 7 · Minggu 13–14</div>
+          <div class="phase-title">Admin System & Moderasi</div>
+        </div>
+        <span class="phase-status status-future">Planned</span>
+      </div>
+      <div class="task-grid">
+        <div class="task-list">
+          <div class="task task-todo"><span class="check-todo">○</span>Admin login terpisah (subdomain admin.maribaca.com)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Middleware JWT admin (scope: admin, expires: 8h)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Admin dashboard: statistik platform (user, novel, revenue)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Antrian laporan konten: review, hapus, tolak laporan</div>
+        </div>
+        <div class="task-list">
+          <div class="task task-todo"><span class="check-todo">○</span>Ban/unban user + alasan + notifikasi email</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Audit log semua aksi admin (tabel <code>admin_logs</code>)</div>
+          <div class="task task-todo"><span class="check-todo">○</span><strong>👑 SuperAdmin:</strong> assign/revoke role ADMIN</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Seed SuperAdmin awal (<code>SUPERADMIN_SEED_EMAIL</code>)</div>
+        </div>
+      </div>
+      <div class="phase-chips">
+        <span class="badge badge-red">Admin Panel</span>
+        <span class="badge badge-pink">SuperAdmin</span>
+        <span class="badge badge-gray">Audit Log</span>
+        <span class="badge badge-amber">JWT Admin</span>
+      </div>
+    </div>
+
+    <!-- PHASE 8 -->
+    <div class="phase-card phase-future">
+      <div class="phase-header">
+        <div>
+          <div class="phase-num">Phase 8 · Minggu 15–16</div>
+          <div class="phase-title">Revenue, Donasi & Monetisasi</div>
+        </div>
+        <span class="phase-status status-future">Planned</span>
+      </div>
+      <div class="task-grid">
+        <div class="task-list">
+          <div class="task task-todo"><span class="check-todo">○</span>Panel donasi di profil penulis (crypto wallet QR)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Halaman donasi platform <code>/donate</code> via Midtrans</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Webhook Midtrans: konfirmasi pembayaran otomatis</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Badge Verified Author: purchase flow + centang biru</div>
+        </div>
+        <div class="task-list">
+          <div class="task task-todo"><span class="check-todo">○</span>Author analytics dashboard: views, followers, donasi</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Tabel <code>platform_revenue</code>: rekap semua transaksi</div>
+          <div class="task task-todo"><span class="check-todo">○</span>sitemap.xml dinamis + structured data (JSON-LD)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Load testing ringan (k6) sebelum publish ke production</div>
+        </div>
+      </div>
+      <div class="phase-chips">
+        <span class="badge badge-amber">Midtrans</span>
+        <span class="badge badge-green">Donasi</span>
+        <span class="badge badge-teal">Analytics</span>
+        <span class="badge badge-purple">SEO</span>
+        <span class="badge badge-gray">k6</span>
+      </div>
+    </div>
+
+    <!-- PHASE 9 -->
+    <div class="phase-card phase-future">
+      <div class="phase-header">
+        <div>
+          <div class="phase-num">Phase 9 · Post-launch</div>
+          <div class="phase-title">Scale, Monitoring & Masa Depan</div>
+        </div>
+        <span class="phase-status status-future">Future</span>
+      </div>
+      <div class="task-grid">
+        <div class="task-list">
+          <div class="task task-todo"><span class="check-todo">○</span>Sentry error tracking (frontend + backend)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Grafana + Prometheus metrics</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Database read replicas (PostgreSQL)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Migrate ke AWS/GCP jika traffic &gt; 10K DAU</div>
+        </div>
+        <div class="task-list">
+          <div class="task task-todo"><span class="check-todo">○</span>CDN optimization (Cloudflare full setup)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Iklan kontekstual non-invasif (homepage + browse)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>AI rekomendasi novel (based on reading history)</div>
+          <div class="task task-todo"><span class="check-todo">○</span>Mobile app (React Native) — eksplorasi</div>
+        </div>
+      </div>
+      <div class="phase-chips">
+        <span class="badge badge-red">Sentry</span>
+        <span class="badge badge-blue">Grafana</span>
+        <span class="badge badge-green">CDN</span>
+        <span class="badge badge-purple">AI Rekomendasi</span>
+        <span class="badge badge-pink">React Native</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║   TAB 7: DONASI                              ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<section id="tab-donasi" class="tab-section">
+  <div class="section-title">Donasi Penulis &amp; Revenue Platform MariBaca</div>
+  <div class="section-desc">Dua lapisan pendapatan: donasi langsung pembaca → penulis, dan revenue untuk keberlangsungan platform</div>
+
+  <div class="info-box info-green">
+    <span>✅</span>
+    <span><strong>Model Hybrid:</strong> Penulis menerima donasi langsung (zero fee dari platform). MariBaca mendapat revenue dari donasi sukarela ke platform, badge premium penulis, dan iklan kontekstual non-invasif di masa depan.</span>
+  </div>
+
+  <hr class="divider">
+  <h3>💰 Revenue Model MariBaca — Keberlanjutan Platform</h3>
+
+  <div class="grid3" style="margin-bottom:28px">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(15,184,160,0.15)">☕</div>
+        <div><div class="card-title" style="color:var(--teal2)">Donasi ke Platform</div><div class="card-sub">Sukarela dari reader/author</div></div>
+      </div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.6">Pembaca &amp; penulis yang terbantu bisa mendukung keberlangsungan MariBaca langsung melalui halaman <code style="font-family:monospace;font-size:11px">/donate</code>. Terintegrasi Midtrans (transfer bank, QRIS, e-wallet).</div>
+      <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:4px"><span class="badge badge-teal">QRIS</span><span class="badge badge-blue">Transfer Bank</span><span class="badge badge-green">GoPay/OVO</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(240,164,58,0.15)">🏅</div>
+        <div><div class="card-title" style="color:var(--amber2)">Badge Verified Author</div><div class="card-sub">Rp 50.000/bulan atau Rp 450.000/tahun</div></div>
+      </div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.6">Penulis yang ingin diverifikasi &amp; mendapat centang biru mendukung platform. Benefit: prioritas di rekomendasi, badge profil, akses statistik lanjutan.</div>
+      <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:4px"><span class="badge badge-amber">Centang Biru</span><span class="badge badge-purple">Prioritas Search</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:rgba(124,92,252,0.15)">📣</div>
+        <div><div class="card-title" style="color:var(--purple2)">Iklan Kontekstual</div><div class="card-sub">Phase 4 (post-launch, opsional)</div></div>
+      </div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.6">Iklan berbasis genre/minat pembaca, non-invasif (tidak di tengah chapter). Banner di halaman browse &amp; homepage. <strong>Tidak ada iklan di tengah baca.</strong></div>
+      <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:4px"><span class="badge badge-gray">Homepage Banner</span><span class="badge badge-gray">Browse Page</span></div>
+    </div>
+  </div>
+
+  <div class="info-box info-amber">
+    <span>⚠</span>
+    <span><strong>Prinsip MariBaca:</strong> Tidak ada paywall untuk membaca. Semua novel tetap bisa dibaca gratis. Revenue digunakan untuk server, operasional, dan pengembangan fitur baru.</span>
+  </div>
+
+  <hr class="divider">
+
+  <div class="grid2">
+    <div>
+      <h3>✍ Donasi Langsung Pembaca → Penulis (Zero Fee)</h3>
+      <div class="donation-flow" style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:24px">
+        <div class="flow-row">
+          <div class="flow-box flow-reader">👤 Pembaca<br><small>Klik tombol donasi</small></div>
+        </div>
+        <div class="flow-down">↓</div>
+        <div class="flow-row">
+          <div class="flow-box flow-platform" style="text-align:center">
+            🌐 Platform Webnovel<br>
+            <small>Tampilkan tombol + QR</small><br>
+            <small style="font-family:monospace;font-size:10px;opacity:0.6">DB: donation_links (hanya string)</small>
+          </div>
+        </div>
+        <div class="flow-down">↓ redirect ke platform donasi</div>
+        <div class="flow-row" style="gap:8px;flex-wrap:wrap;justify-content:center">
+          <div class="flow-box flow-method">☕ BuyMeACoffee</div>
+          <div class="flow-box flow-method">💙 PayPal.me</div>
+          <div class="flow-box flow-method">🎋 Trakteer</div>
+          <div class="flow-box flow-method">🌿 Saweria</div>
+          <div class="flow-box flow-method">🔷 Crypto QR</div>
+          <div class="flow-box flow-method">🏦 Bank Transfer</div>
+        </div>
+        <div class="flow-down">↓ langsung</div>
+        <div class="flow-row">
+          <div class="flow-box flow-writer">✍ Penulis menerima donasi</div>
+        </div>
+        <div class="flow-note">⚠ Platform tidak pernah menyentuh atau memproses uang sama sekali</div>
+      </div>
+    </div>
+
+    <div>
+      <h3>Komponen DonationPanel</h3>
+      <div class="code-block">
+        <div class="code-header"><span class="code-lang">tsx</span><span class="code-filename">components/donation/DonationPanel.tsx</span></div>
+        <pre><span class="kw">import</span> QRCode <span class="kw">from</span> <span class="str">'qrcode.react'</span>
+
+<span class="kw">const</span> <span class="fn">DonationPanel</span> = ({ links }: { links: <span class="ty">DonationLinks</span> }) =&gt; (
+  <span class="op">&lt;</span>div className=<span class="str">"space-y-3"</span><span class="op">&gt;</span>
+    <span class="cm">&#123;/* Tombol eksternal */&#125;</span>
+    &#123;links.buymeacoffee &amp;&amp; (
+      <span class="op">&lt;</span>a href=&#123;links.buymeacoffee&#125; target=<span class="str">"_blank"</span><span class="op">&gt;</span>
+        <span class="op">&lt;</span>Button variant=<span class="str">"outline"</span><span class="op">&gt;</span>☕ Buy Me a Coffee<span class="op">&lt;/</span>Button<span class="op">&gt;</span>
+      <span class="op">&lt;/</span>a<span class="op">&gt;</span>
+    )&#125;
+    &#123;links.paypal &amp;&amp; (
+      <span class="op">&lt;</span>a href=&#123;links.paypal&#125; target=<span class="str">"_blank"</span><span class="op">&gt;</span>
+        <span class="op">&lt;</span>Button variant=<span class="str">"outline"</span><span class="op">&gt;</span>💙 PayPal<span class="op">&lt;/</span>Button<span class="op">&gt;</span>
+      <span class="op">&lt;/</span>a<span class="op">&gt;</span>
+    )&#125;
+
+    <span class="cm">&#123;/* QR code — zero backend */&#125;</span>
+    &#123;links.ethWallet &amp;&amp; (
+      <span class="op">&lt;</span>div className=<span class="str">"border rounded p-3"</span><span class="op">&gt;</span>
+        <span class="op">&lt;</span>p<span class="op">&gt;</span>ETH / ERC-20<span class="op">&lt;/</span>p<span class="op">&gt;</span>
+        <span class="op">&lt;</span>QRCode value=&#123;links.ethWallet&#125; size=&#123;<span class="num">128</span>&#125; <span class="op">/&gt;</span>
+        <span class="op">&lt;</span>p className=<span class="str">"font-mono text-xs break-all"</span><span class="op">&gt;</span>
+          &#123;links.ethWallet&#125;
+        <span class="op">&lt;/</span>p<span class="op">&gt;</span>
+      <span class="op">&lt;/</span>div<span class="op">&gt;</span>
+    )&#125;
+
+    <span class="cm">&#123;/* Bank transfer — teks saja */&#125;</span>
+    &#123;links.bankAccounts?.map(bank =&gt; (
+      <span class="op">&lt;</span>div key=&#123;bank.number&#125; className=<span class="str">"border rounded p-3"</span><span class="op">&gt;</span>
+        <span class="op">&lt;</span>p className=<span class="str">"font-bold"</span><span class="op">&gt;</span>&#123;bank.bank&#125;<span class="op">&lt;/</span>p<span class="op">&gt;</span>
+        <span class="op">&lt;</span>p className=<span class="str">"font-mono text-lg"</span><span class="op">&gt;</span>&#123;bank.number&#125;<span class="op">&lt;/</span>p<span class="op">&gt;</span>
+        <span class="op">&lt;</span>p<span class="op">&gt;</span>a/n &#123;bank.name&#125;<span class="op">&lt;/</span>p<span class="op">&gt;</span>
+      <span class="op">&lt;/</span>div<span class="op">&gt;</span>
+    ))&#125;
+  <span class="op">&lt;/</span>div<span class="op">&gt;</span>
+)</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║   TAB 8: UI PREVIEW                          ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<section id="tab-ui" class="tab-section">
+  <div class="section-title">UI Preview — Gambaran Tampilan</div>
+  <div class="section-desc">Estimasi tampilan setiap halaman utama. Gunakan sebagai referensi saat implementasi komponen.</div>
+
+  <div class="grid2" style="gap:20px">
+
+    <!-- Homepage -->
+    <div>
+      <h3>① Homepage / Discovery</h3>
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="browser-dots"><div class="browser-dot b-red"></div><div class="browser-dot b-yellow"></div><div class="browser-dot b-green"></div></div>
+          <div class="browser-url">maribaca.com</div>
+        </div>
+        <div class="browser-content">
+          <div class="mock-nav">
+            <span class="mock-logo">✦ MariBaca</span>
+            <div class="mock-nav-links"><span>Jelajahi</span><span>Ranking</span><span>Genre</span></div>
+            <div style="display:flex;gap:6px"><span class="mock-btn mock-btn-outline">Masuk</span><span class="mock-btn mock-btn-primary">Daftar</span></div>
+          </div>
+          <div class="mock-hero">
+            <div class="mock-hero-title">Baca & Tulis Novel<br>Tanpa Batas</div>
+            <div class="mock-hero-sub">Ribuan novel gratis · Update harian · Dukung penulis favoritmu</div>
+            <div style="display:flex;gap:8px;justify-content:center">
+              <span class="mock-btn mock-btn-primary">Mulai Baca</span>
+              <span class="mock-btn mock-btn-outline">Mulai Menulis</span>
+            </div>
+          </div>
+          <div style="font-size:10px;color:var(--text3);margin:10px 0 6px;font-weight:600;text-transform:uppercase;letter-spacing:.05em">🔥 Trending Minggu Ini</div>
+          <div class="mock-novel-grid">
+            <div class="mock-novel-card"><div class="mock-cover" style="background:linear-gradient(135deg,#7c3aed,#3b82f6)">⚔️</div><div class="mock-card-info"><div class="mock-novel-title">Pedang Abadi</div><div class="mock-novel-meta">Fantasy · 234 ch</div></div></div>
+            <div class="mock-novel-card"><div class="mock-cover" style="background:linear-gradient(135deg,#db2777,#f59e0b)">💕</div><div class="mock-card-info"><div class="mock-novel-title">Cinta di Kantor</div><div class="mock-novel-meta">Romance · 89 ch</div></div></div>
+            <div class="mock-novel-card"><div class="mock-cover" style="background:linear-gradient(135deg,#059669,#0d9488)">🌌</div><div class="mock-card-info"><div class="mock-novel-title">Dunia Paralel</div><div class="mock-novel-meta">Sci-Fi · 156 ch</div></div></div>
+            <div class="mock-novel-card"><div class="mock-cover" style="background:linear-gradient(135deg,#d97706,#dc2626)">👁</div><div class="mock-card-info"><div class="mock-novel-title">Mata Iblis</div><div class="mock-novel-meta">Horror · 67 ch</div></div></div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--text3);margin-top:6px;text-align:center">Navbar · Hero · Grid novel trending · Filter genre</div>
+    </div>
+
+    <!-- Chapter Reader -->
+    <div>
+      <h3>② Chapter Reader</h3>
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="browser-dots"><div class="browser-dot b-red"></div><div class="browser-dot b-yellow"></div><div class="browser-dot b-green"></div></div>
+          <div class="browser-url">maribaca.com/novel/pedang-abadi/chapter/1</div>
+        </div>
+        <div class="browser-content">
+          <div class="mock-nav" style="margin-bottom:10px">
+            <span style="font-size:10px;color:var(--text3)">← Pedang Abadi</span>
+            <div style="display:flex;gap:8px;font-size:10px;color:var(--text2)">
+              <span>Aa</span>
+              <span>☾</span>
+              <span>⚙</span>
+            </div>
+          </div>
+          <div class="mock-chapter-reader">
+            <div class="mock-chapter-title">Chapter 1: Awal Perjalanan</div>
+            <div class="mock-chapter-text">
+              Di bawah langit senja yang kemerahan, seorang pemuda berdiri di puncak Gunung Besi. Angin bertiup kencang menerpa jubahnya yang lusuh.
+              <br><br>
+              "Hari ini aku akan mulai perjalananku," gumamnya pelan, menggenggam erat pedang warisan ayahnya.
+              <br><br>
+              Nama pemuda itu adalah Arya. Tidak ada yang istimewa darinya — setidaknya begitu yang selama ini ia percaya...
+            </div>
+            <div class="mock-chapter-nav">
+              <span class="mock-btn mock-btn-outline" style="font-size:9px">← Chapter sebelumnya</span>
+              <span style="font-size:10px;color:var(--text3)">1 / 234</span>
+              <span class="mock-btn mock-btn-primary" style="font-size:9px">Chapter berikutnya →</span>
+            </div>
+          </div>
+          <div style="margin-top:10px;background:var(--bg3);border-radius:6px;padding:8px;font-size:10px;color:var(--text3);display:flex;justify-content:space-between">
+            <span>💬 127 komentar</span>
+            <span>❤ 4.2K suka</span>
+            <span>📖 Progress: 32%</span>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--text3);margin-top:6px;text-align:center">Reader settings · Font size · Dark mode · Auto-save progress</div>
+    </div>
+
+    <!-- Author Profile -->
+    <div>
+      <h3>③ Profil Penulis + Donasi</h3>
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="browser-dots"><div class="browser-dot b-red"></div><div class="browser-dot b-yellow"></div><div class="browser-dot b-green"></div></div>
+          <div class="browser-url">maribaca.com/author/arya_pena</div>
+        </div>
+        <div class="browser-content">
+          <div class="mock-profile">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+              <div class="mock-avatar">✍</div>
+              <span class="mock-btn mock-btn-outline" style="font-size:9px;white-space:nowrap">+ Follow</span>
+            </div>
+            <div>
+              <div class="mock-author-name">Arya Pena</div>
+              <div class="mock-author-bio">Penulis fantasy & sci-fi. Suka kucing dan kopi hitam. Aktif update tiap Senin.</div>
+              <div class="mock-author-stats">
+                <div class="mock-stat"><div class="mock-stat-num">12</div><div class="mock-stat-label">Novel</div></div>
+                <div class="mock-stat"><div class="mock-stat-num">48K</div><div class="mock-stat-label">Follower</div></div>
+                <div class="mock-stat"><div class="mock-stat-num">2.1M</div><div class="mock-stat-label">Views</div></div>
+              </div>
+            </div>
+          </div>
+          <div style="background:var(--bg3);border-radius:8px;padding:10px;margin-bottom:10px">
+            <div style="font-size:10px;font-weight:600;color:var(--text2);margin-bottom:8px">☕ Dukung Penulis</div>
+            <div class="donation-buttons">
+              <div class="d-btn d-btn-bmc">☕ Buy Me a Coffee</div>
+              <div class="d-btn d-btn-paypal">💙 PayPal.me/aryapena</div>
+              <div class="d-btn d-btn-crypto">🔷 ETH Wallet (tap untuk QR)</div>
+            </div>
+          </div>
+          <div style="font-size:10px;font-weight:600;color:var(--text2);margin-bottom:6px">Novel Terbaru</div>
+          <div class="mock-novel-grid" style="grid-template-columns:repeat(3,1fr)">
+            <div class="mock-novel-card"><div class="mock-cover" style="background:linear-gradient(135deg,#7c3aed,#3b82f6)">⚔️</div><div class="mock-card-info"><div class="mock-novel-title">Pedang Abadi</div></div></div>
+            <div class="mock-novel-card"><div class="mock-cover" style="background:linear-gradient(135deg,#059669,#0d9488)">🌌</div><div class="mock-card-info"><div class="mock-novel-title">Dunia Paralel</div></div></div>
+            <div class="mock-novel-card"><div class="mock-cover" style="background:linear-gradient(135deg,#d97706,#dc2626)">🌀</div><div class="mock-card-info"><div class="mock-novel-title">Portal Waktu</div></div></div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--text3);margin-top:6px;text-align:center">Bio · Stats · Panel donasi · Daftar novel penulis</div>
+    </div>
+
+    <!-- Writer Dashboard -->
+    <div>
+      <h3>④ Dashboard Penulis</h3>
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="browser-dots"><div class="browser-dot b-red"></div><div class="browser-dot b-yellow"></div><div class="browser-dot b-green"></div></div>
+          <div class="browser-url">maribaca.com/dashboard</div>
+        </div>
+        <div class="browser-content">
+          <div style="display:flex;gap:16px;margin-bottom:12px">
+            <div style="width:120px;flex-shrink:0">
+              <div style="font-size:10px;font-weight:600;color:var(--text3);margin-bottom:8px">MENU</div>
+              <div style="display:flex;flex-direction:column;gap:4px;font-size:10px">
+                <div style="background:rgba(124,92,252,0.1);color:var(--purple3);padding:5px 8px;border-radius:5px">📊 Overview</div>
+                <div style="color:var(--text2);padding:5px 8px">📖 Novel saya</div>
+                <div style="color:var(--text2);padding:5px 8px">✍ Tulis chapter</div>
+                <div style="color:var(--text2);padding:5px 8px">💸 Donasi setup</div>
+                <div style="color:var(--text2);padding:5px 8px">⚙ Pengaturan</div>
+              </div>
+            </div>
+            <div style="flex:1">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px">
+                <div style="background:rgba(124,92,252,0.1);border:1px solid rgba(124,92,252,0.2);border-radius:6px;padding:8px"><div style="font-size:16px;font-weight:700;color:var(--purple2)">2.1M</div><div style="font-size:9px;color:var(--text3)">Total views</div></div>
+                <div style="background:rgba(34,201,126,0.08);border:1px solid rgba(34,201,126,0.2);border-radius:6px;padding:8px"><div style="font-size:16px;font-weight:700;color:var(--green2)">48K</div><div style="font-size:9px;color:var(--text3)">Followers</div></div>
+              </div>
+              <div style="font-size:10px;font-weight:600;color:var(--text2);margin-bottom:6px">Novel Aktif</div>
+              <div style="background:var(--bg3);border-radius:6px;padding:8px;margin-bottom:4px">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <div>
+                    <div style="font-size:11px;font-weight:600">⚔️ Pedang Abadi</div>
+                    <div style="font-size:9px;color:var(--text3)">234 chapter · 1.2M views</div>
+                  </div>
+                  <div style="display:flex;gap:4px">
+                    <span class="mock-btn mock-btn-outline" style="font-size:9px">Edit</span>
+                    <span class="mock-btn mock-btn-primary" style="font-size:9px">+ Chapter</span>
+                  </div>
+                </div>
+              </div>
+              <div style="background:var(--bg3);border-radius:6px;padding:8px">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <div>
+                    <div style="font-size:11px;font-weight:600">🌌 Dunia Paralel</div>
+                    <div style="font-size:9px;color:var(--text3)">156 chapter · 890K views</div>
+                  </div>
+                  <div style="display:flex;gap:4px">
+                    <span class="mock-btn mock-btn-outline" style="font-size:9px">Edit</span>
+                    <span class="mock-btn mock-btn-primary" style="font-size:9px">+ Chapter</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--text3);margin-top:6px;text-align:center">Stats · Novel list · Quick-add chapter · Donasi settings</div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div>
+      <h3>⑤ Admin Dashboard (admin.maribaca.com)</h3>
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="browser-dots"><div class="browser-dot b-red"></div><div class="browser-dot b-yellow"></div><div class="browser-dot b-green"></div></div>
+          <div class="browser-url" style="color:#f0544f">admin.maribaca.com/dashboard</div>
+        </div>
+        <div class="browser-content">
+          <div class="mock-nav">
+            <span style="font-family:Syne,sans-serif;font-weight:800;font-size:13px;color:#f0544f">🛡 MariBaca Admin</span>
+            <div style="font-size:10px;color:var(--text3)">Logged in as: Agastya (SuperAdmin)</div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px">
+            <div style="background:rgba(58,156,252,0.1);border:1px solid rgba(58,156,252,0.2);border-radius:6px;padding:7px"><div style="font-size:15px;font-weight:700;color:var(--blue2)">12,847</div><div style="font-size:9px;color:var(--text3)">Total Users</div></div>
+            <div style="background:rgba(124,92,252,0.1);border:1px solid rgba(124,92,252,0.2);border-radius:6px;padding:7px"><div style="font-size:15px;font-weight:700;color:var(--purple2)">3,291</div><div style="font-size:9px;color:var(--text3)">Total Novel</div></div>
+            <div style="background:rgba(240,84,79,0.1);border:1px solid rgba(240,84,79,0.2);border-radius:6px;padding:7px"><div style="font-size:15px;font-weight:700;color:#ff9e9b">24</div><div style="font-size:9px;color:var(--text3)">Laporan Pending</div></div>
+            <div style="background:rgba(34,201,126,0.1);border:1px solid rgba(34,201,126,0.2);border-radius:6px;padding:7px"><div style="font-size:15px;font-weight:700;color:var(--green2)">Rp 2.1M</div><div style="font-size:9px;color:var(--text3)">Revenue Bulan Ini</div></div>
+          </div>
+          <div style="font-size:10px;font-weight:600;color:var(--text2);margin-bottom:5px">🚨 Laporan Terbaru</div>
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <div style="background:rgba(240,84,79,0.08);border:1px solid rgba(240,84,79,0.15);border-radius:5px;padding:6px 8px;display:flex;justify-content:space-between;align-items:center">
+              <div><div style="font-size:10px;font-weight:600;color:#ff9e9b">Konten Dewasa Tanpa Label</div><div style="font-size:9px;color:var(--text3)">Novel: "Bayangan Malam" · Dilaporkan 3x</div></div>
+              <div style="display:flex;gap:4px"><span class="mock-btn" style="font-size:9px;background:rgba(34,201,126,0.1);color:var(--green2);border:1px solid rgba(34,201,126,0.2)">Review</span></div>
+            </div>
+            <div style="background:rgba(240,164,58,0.08);border:1px solid rgba(240,164,58,0.15);border-radius:5px;padding:6px 8px;display:flex;justify-content:space-between;align-items:center">
+              <div><div style="font-size:10px;font-weight:600;color:var(--amber2)">Spam Komentar</div><div style="font-size:9px;color:var(--text3)">User: @jokospam · 12 komentar iklan</div></div>
+              <div style="display:flex;gap:4px"><span class="mock-btn" style="font-size:9px;background:rgba(34,201,126,0.1);color:var(--green2);border:1px solid rgba(34,201,126,0.2)">Review</span></div>
+            </div>
+          </div>
+          <div style="margin-top:8px;display:flex;gap:6px">
+            <span class="mock-btn" style="font-size:9px;background:rgba(240,102,176,0.1);color:#ffb3e0;border:1px solid rgba(240,102,176,0.2)">👑 Manajemen Admin</span>
+            <span class="mock-btn" style="font-size:9px;background:rgba(58,156,252,0.1);color:var(--blue2);border:1px solid rgba(58,156,252,0.2)">📋 Audit Log</span>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--text3);margin-top:6px;text-align:center">Platform stats · Report queue · Revenue · SuperAdmin panel</div>
+    </div>
+
+    <!-- Language & Theme Toggle -->
+    <div>
+      <h3>⑥ Language &amp; Theme Toggle (Navbar)</h3>
+      <div class="browser-frame">
+        <div class="browser-bar">
+          <div class="browser-dots"><div class="browser-dot b-red"></div><div class="browser-dot b-yellow"></div><div class="browser-dot b-green"></div></div>
+          <div class="browser-url">maribaca.com</div>
+        </div>
+        <div class="browser-content">
+          <div class="mock-nav">
+            <span class="mock-logo">✦ MariBaca</span>
+            <div class="mock-nav-links"><span>Beranda</span><span>Jelajahi</span><span>Ranking</span></div>
+            <div style="display:flex;gap:5px;align-items:center">
+              <!-- Language toggle -->
+              <div style="display:flex;border:1px solid var(--border);border-radius:5px;overflow:hidden;font-size:9px">
+                <div style="padding:3px 7px;background:var(--purple);color:white;font-weight:600">ID</div>
+                <div style="padding:3px 7px;color:var(--text3)">EN</div>
+              </div>
+              <!-- Theme toggle -->
+              <div style="width:24px;height:24px;border-radius:5px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;cursor:pointer">🌙</div>
+              <span class="mock-btn mock-btn-outline" style="font-size:9px">Masuk</span>
+              <span class="mock-btn mock-btn-primary" style="font-size:9px">Daftar</span>
+            </div>
+          </div>
+          <div style="font-size:10px;color:var(--text2);text-align:center;padding:20px 0">
+            <div style="font-size:14px;font-weight:700;color:var(--text0);margin-bottom:6px">Toggle Bahasa &amp; Tema</div>
+            <div style="color:var(--text2);font-size:11px">Klik <strong>ID/EN</strong> untuk ganti bahasa. Klik 🌙 untuk switch ke light mode.</div>
+            <div style="margin-top:10px;display:flex;justify-content:center;gap:10px">
+              <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:10px">
+                <div style="color:var(--text3);margin-bottom:3px">🌙 Dark (default)</div>
+                <div style="background:var(--bg0);width:60px;height:20px;border-radius:3px;margin:0 auto"></div>
+              </div>
+              <div style="background:#f8f9fc;border:1px solid #dde2ef;border-radius:8px;padding:8px 16px;font-size:10px">
+                <div style="color:#7a92b4;margin-bottom:3px">☀ Light</div>
+                <div style="background:white;width:60px;height:20px;border-radius:3px;margin:0 auto;border:1px solid #dde2ef"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--text3);margin-top:6px;text-align:center">Navbar toggle · Cookie persist · next-themes + next-i18next</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║   TAB 9: RULES & ENV                         ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<section id="tab-rules" class="tab-section">
+  <div class="section-title">Coding Rules & Environment Variables</div>
+  <div class="section-desc">Konvensi penamaan, struktur kode, dan semua env yang dibutuhkan</div>
+
+  <h3>Konvensi Penamaan</h3>
+  <div class="rules-table" style="margin-bottom:24px">
+    <table>
+      <thead><tr><th>Jenis</th><th>Konvensi</th><th>Contoh</th></tr></thead>
+      <tbody>
+        <tr><td>File / Folder</td><td><code>kebab-case</code></td><td><code>novel-card.tsx</code>, <code>auth.service.ts</code></td></tr>
+        <tr><td>React Component</td><td>PascalCase</td><td><code>NovelCard</code>, <code>ChapterContent</code></td></tr>
+        <tr><td>Fungsi / Variable</td><td>camelCase</td><td><code>fetchNovels()</code>, <code>isLoading</code></td></tr>
+        <tr><td>Konstanta global</td><td>SCREAMING_SNAKE</td><td><code>MAX_FILE_SIZE</code>, <code>BASE_URL</code></td></tr>
+        <tr><td>Database field</td><td>camelCase (Prisma)</td><td><code>authorId</code>, <code>viewCount</code></td></tr>
+        <tr><td>Database tabel (SQL)</td><td>snake_case</td><td><code>novel_genres</code>, <code>reading_progress</code></td></tr>
+        <tr><td>API endpoint</td><td>kebab-case</td><td><code>/api/v1/reading-progress</code></td></tr>
+        <tr><td>Branch Git</td><td>kebab-case + prefix</td><td><code>feat/reading-progress</code>, <code>fix/auth-bug</code></td></tr>
+        <tr><td>Commit message</td><td>Conventional Commits</td><td><code>feat: tambah donasi panel</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Pola Controller → Service (WAJIB)</h3>
+  <div class="code-block" style="margin-bottom:24px">
+    <div class="code-header"><span class="code-lang">typescript</span><span class="code-filename">controllers/novel.controller.ts ↔ services/novel.service.ts</span></div>
+    <pre><span class="cm">// ✅ BENAR — controller hanya handle HTTP</span>
+<span class="kw">export const</span> <span class="fn">getNovel</span> = <span class="kw">async</span> (req: <span class="ty">Request</span>, res: <span class="ty">Response</span>, next: <span class="ty">NextFunction</span>) =&gt; {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> novel = <span class="kw">await</span> novelService.<span class="fn">findBySlug</span>(req.params.slug)
+    <span class="kw">if</span> (!novel) <span class="kw">return</span> res.status(<span class="num">404</span>).json({ message: <span class="str">'Novel tidak ditemukan'</span> })
+    <span class="kw">return</span> res.json({ status: <span class="str">'success'</span>, data: novel })
+  } <span class="kw">catch</span> (err) { next(err) }  <span class="cm">// lempar ke errorHandler</span>
+}
+
+<span class="cm">// ✅ BENAR — service handle logika bisnis + DB</span>
+<span class="kw">export const</span> <span class="fn">findBySlug</span> = <span class="kw">async</span> (slug: <span class="ty">string</span>): <span class="ty">Promise</span>&lt;<span class="ty">Novel</span> | <span class="kw">null</span>&gt; =&gt; {
+  <span class="kw">return</span> prisma.novel.<span class="fn">findUnique</span>({
+    where: { slug },
+    include: { author: <span class="kw">true</span>, genres: { include: { genre: <span class="kw">true</span> } } }
+  })
+}
+
+<span class="cm">// ❌ SALAH — jangan akses prisma langsung dari controller</span>
+<span class="kw">const</span> novel = <span class="kw">await</span> prisma.novel.<span class="fn">findUnique</span>({ where: { slug } }) <span class="cm">// JANGAN</span></pre>
+  </div>
+
+  <h3>Format Response API (Konsisten)</h3>
+  <div class="grid2" style="margin-bottom:24px">
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">json</span><span class="code-filename">Response sukses</span></div>
+      <pre>{
+  <span class="str">"status"</span>: <span class="str">"success"</span>,
+  <span class="str">"data"</span>: { <span class="cm">/* hasil */</span> },
+  <span class="str">"meta"</span>: {
+    <span class="str">"page"</span>: <span class="num">1</span>,
+    <span class="str">"limit"</span>: <span class="num">20</span>,
+    <span class="str">"total"</span>: <span class="num">150</span>
+  }
+}</pre>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">json</span><span class="code-filename">Response error</span></div>
+      <pre>{
+  <span class="str">"status"</span>: <span class="str">"error"</span>,
+  <span class="str">"message"</span>: <span class="str">"Novel tidak ditemukan"</span>,
+  <span class="str">"code"</span>: <span class="str">"NOVEL_NOT_FOUND"</span>,
+  <span class="str">"details"</span>: {}
+}</pre>
+    </div>
+  </div>
+
+  <h3>Environment Variables</h3>
+
+  <div class="env-section">
+    <div class="env-header">── App Config</div>
+    <div class="env-line"><span class="env-key">NODE_ENV</span><span class="env-val">development</span></div>
+    <div class="env-line"><span class="env-key">PORT</span><span class="env-val">4000</span></div>
+    <div class="env-line"><span class="env-key">FRONTEND_URL</span><span class="env-val">http://localhost:3000</span></div>
+    <div class="env-line"><span class="env-key">ADMIN_PORTAL_URL</span><span class="env-val">http://localhost:3001</span><span class="env-desc"># admin.maribaca.com di production</span></div>
+    <div class="env-line"><span class="env-key">APP_NAME</span><span class="env-val">MariBaca</span><span class="env-desc"># nama platform</span></div>
+    <div class="env-line"><span class="env-key">NEXT_PUBLIC_DEFAULT_LANG</span><span class="env-val">id</span><span class="env-desc"># bahasa default: id atau en</span></div>
+  </div>
+
+  <div class="env-section">
+    <div class="env-header">── Database</div>
+    <div class="env-line"><span class="env-key">DATABASE_URL</span><span class="env-val">postgresql://postgres:pass@localhost:5432/webnovel_db</span></div>
+    <div class="env-line"><span class="env-key">REDIS_URL</span><span class="env-val">redis://localhost:6379</span></div>
+  </div>
+
+  <div class="env-section">
+    <div class="env-header">── JWT Auth</div>
+    <div class="env-line"><span class="env-key">JWT_ACCESS_SECRET</span><span class="env-val">[64-char random string]</span><span class="env-desc"># generate: openssl rand -hex 32</span></div>
+    <div class="env-line"><span class="env-key">JWT_REFRESH_SECRET</span><span class="env-val">[64-char random string]</span></div>
+    <div class="env-line"><span class="env-key">JWT_ACCESS_EXPIRES</span><span class="env-val">15m</span></div>
+    <div class="env-line"><span class="env-key">JWT_REFRESH_EXPIRES</span><span class="env-val">30d</span></div>
+  </div>
+
+  <div class="env-section">
+    <div class="env-header">── NextAuth (frontend/.env.local)</div>
+    <div class="env-line"><span class="env-key">NEXTAUTH_SECRET</span><span class="env-val">[random string]</span></div>
+    <div class="env-line"><span class="env-key">NEXTAUTH_URL</span><span class="env-val">http://localhost:3000</span></div>
+    <div class="env-line"><span class="env-key">GOOGLE_CLIENT_ID</span><span class="env-val">your_google_oauth_client_id</span><span class="env-desc"># dari console.cloud.google.com</span></div>
+    <div class="env-line"><span class="env-key">GOOGLE_CLIENT_SECRET</span><span class="env-val">your_google_oauth_secret</span></div>
+  </div>
+
+  <div class="env-section">
+    <div class="env-header">── Cloudflare R2</div>
+    <div class="env-line"><span class="env-key">R2_ACCOUNT_ID</span><span class="env-val">your_account_id</span></div>
+    <div class="env-line"><span class="env-key">R2_ACCESS_KEY_ID</span><span class="env-val">your_access_key</span></div>
+    <div class="env-line"><span class="env-key">R2_SECRET_ACCESS_KEY</span><span class="env-val">your_secret_key</span></div>
+    <div class="env-line"><span class="env-key">R2_BUCKET_NAME</span><span class="env-val">webnovel-assets</span></div>
+    <div class="env-line"><span class="env-key">R2_PUBLIC_URL</span><span class="env-val">https://assets.maribaca.com</span></div>
+  </div>
+
+  <div class="env-section">
+    <div class="env-header">── Meilisearch &amp; Email</div>
+    <div class="env-line"><span class="env-key">MEILISEARCH_URL</span><span class="env-val">http://localhost:7700</span></div>
+    <div class="env-line"><span class="env-key">MEILISEARCH_API_KEY</span><span class="env-val">your_master_key</span></div>
+    <div class="env-line"><span class="env-key">RESEND_API_KEY</span><span class="env-val">re_xxxxxxxxxxxx</span><span class="env-desc"># dari resend.com</span></div>
+    <div class="env-line"><span class="env-key">EMAIL_FROM</span><span class="env-val">noreply@maribaca.com</span></div>
+  </div>
+
+  <div class="env-section">
+    <div class="env-header">── Midtrans (Platform Revenue)</div>
+    <div class="env-line"><span class="env-key">MIDTRANS_SERVER_KEY</span><span class="env-val">SB-Mid-server-xxxxxxxx</span><span class="env-desc"># dari dashboard.midtrans.com</span></div>
+    <div class="env-line"><span class="env-key">MIDTRANS_CLIENT_KEY</span><span class="env-val">SB-Mid-client-xxxxxxxx</span></div>
+    <div class="env-line"><span class="env-key">MIDTRANS_IS_PRODUCTION</span><span class="env-val">false</span><span class="env-desc"># true saat production</span></div>
+  </div>
+
+  <div class="env-section">
+    <div class="env-header">── Admin Portal</div>
+    <div class="env-line"><span class="env-key">ADMIN_JWT_SECRET</span><span class="env-val">[64-char random string]</span><span class="env-desc"># berbeda dari user JWT secret</span></div>
+    <div class="env-line"><span class="env-key">ADMIN_JWT_EXPIRES</span><span class="env-val">8h</span><span class="env-desc"># sesi admin lebih pendek dari user</span></div>
+    <div class="env-line"><span class="env-key">SUPERADMIN_SEED_EMAIL</span><span class="env-val">agastya@maribaca.com</span><span class="env-desc"># untuk seed script saja</span></div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════╗ -->
+<!-- ║   TAB 10: APP FLOW                           ║ -->
+<!-- ╚══════════════════════════════════════════════╝ -->
+<section id="tab-flow" class="tab-section">
+  <div class="section-title">App Flow — Perjalanan Pengguna</div>
+  <div class="section-desc">Diagram lengkap semua skenario utama · Pembaca · Penulis · Auth flow</div>
+
+  <div class="grid2" style="gap:24px">
+
+    <div>
+      <h3>Flow: Pembaca Baru → Baca Novel</h3>
+      <div class="flow-diagram">
+        <div class="flow-node fn-start">🌐 Buka website</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-action">Lihat homepage<br><small style="opacity:.6">Trending + Latest novels</small></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-action">Klik novel dari grid<br><small style="opacity:.6">Redirect ke /novel/:slug</small></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-action">Baca synopsis + daftar chapter<br><small style="opacity:.6">GET /novels/:slug</small></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-action">Klik chapter pertama<br><small style="opacity:.6">GET /novels/:slug/chapters/1</small></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-outcome">📖 Baca chapter<br><small style="opacity:.6">Scroll → auto progress</small></div>
+        <div class="flow-arrow">↓</div>
+        <div style="display:flex;gap:12px;width:100%;justify-content:center">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+            <div class="flow-node fn-action" style="min-width:130px;font-size:11px">Lanjut chapter<br>berikutnya →</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+            <div class="flow-node fn-action" style="min-width:130px;font-size:11px">Daftar & follow novel<br>dapat notif chapter baru</div>
+          </div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-outcome">💸 Kunjungi profil penulis<br><small style="opacity:.6">Panel donasi tersedia</small></div>
+      </div>
+    </div>
+
+    <div>
+      <h3>Flow: Penulis → Publish Chapter</h3>
+      <div class="flow-diagram">
+        <div class="flow-node fn-start">✍ Login sebagai Author</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-action">Buka Dashboard<br><small style="opacity:.6">/dashboard</small></div>
+        <div class="flow-arrow">↓</div>
+        <div style="display:flex;gap:12px;width:100%;justify-content:center">
+          <div class="flow-node fn-action" style="min-width:120px;font-size:11px">Novel baru:<br>POST /novels</div>
+          <div class="flow-node fn-action" style="min-width:120px;font-size:11px">Novel ada:<br>Klik "+ Chapter"</div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-action">Buka TipTap Editor<br><small style="opacity:.6">/dashboard/novel/:id/chapter/new</small></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-action">Tulis konten chapter<br><small style="opacity:.6">Rich text · Bold · Italic · Heading</small></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-action">Klik "Simpan Draft"<br><small style="opacity:.6">POST /chapters · isPublished: false</small></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-action">Klik "Publish"<br><small style="opacity:.6">PATCH /chapters/:id/publish</small></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-data">⚡ Backend:<br><small style="opacity:.6">Sync ke Meilisearch<br>Kirim notif ke followers<br>Update Redis trending</small></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-outcome">✅ Chapter live!<br><small style="opacity:.6">Followers mendapat notifikasi</small></div>
+      </div>
+    </div>
+
+    <div>
+      <h3>Flow: Auth — Register & Login</h3>
+      <div class="flow-diagram">
+        <div class="flow-node fn-start">👤 User buka /register</div>
+        <div class="flow-arrow">↓</div>
+        <div style="display:flex;gap:12px;width:100%;justify-content:center">
+          <div class="flow-node fn-action" style="min-width:130px;font-size:11px">Email + Password<br>POST /auth/register</div>
+          <div class="flow-node fn-action" style="min-width:130px;font-size:11px">Google OAuth<br>NextAuth.js callback</div>
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-data">Backend validasi Zod<br><small style="opacity:.6">cek email duplikat · hash password</small></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-action">Return:<br><small style="opacity:.6">Access token (15m) + Refresh token (30d)</small></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-action">Frontend simpan token<br><small style="opacity:.6">Cookie httpOnly untuk refresh token</small></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-outcome">✅ Login sukses<br><small style="opacity:.6">Redirect ke homepage</small></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-action">Setiap 15 menit:<br><small style="opacity:.6">Auto refresh via POST /auth/refresh</small></div>
+      </div>
+    </div>
+
+    <div>
+      <h3>Flow: Search & Discovery</h3>
+      <div class="flow-diagram">
+        <div class="flow-node fn-start">🔍 User ketik di search bar</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-action">Debounce 300ms<br><small style="opacity:.6">Hindari terlalu banyak request</small></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-data">GET /search?q=query&amp;type=novel<br><small style="opacity:.6">Backend query ke Meilisearch</small></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-action">Tampilkan hasil<br><small style="opacity:.6">Novel · Author · Tag</small></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-action">Klik hasil → detail novel<br><small style="opacity:.6">atau profil penulis</small></div>
+        <div class="flow-arrow">↓</div>
+        <br>
+        <div class="flow-node fn-start" style="margin-top:8px">🏷 Atau: Browse by Genre</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-data">GET /novels?genre=Fantasy<br><small style="opacity:.6">Filter + sort + pagination</small></div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node fn-outcome">📚 Grid novel terfilter<br><small style="opacity:.6">Infinite scroll / pagination</small></div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider">
+  <h3>Legenda Warna Flow</h3>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px">
+    <div style="display:flex;align-items:center;gap:8px"><div class="flow-node fn-start" style="padding:4px 12px;font-size:11px">Start/End</div><span style="font-size:12px;color:var(--text2)">Titik masuk/keluar</span></div>
+    <div style="display:flex;align-items:center;gap:8px"><div class="flow-node fn-action" style="padding:4px 12px;font-size:11px">Action</div><span style="font-size:12px;color:var(--text2)">Aksi UI / navigasi</span></div>
+    <div style="display:flex;align-items:center;gap:8px"><div class="flow-node fn-data" style="padding:4px 12px;font-size:11px">API / Data</div><span style="font-size:12px;color:var(--text2)">Request ke backend</span></div>
+    <div style="display:flex;align-items:center;gap:8px"><div class="flow-node fn-outcome" style="padding:4px 12px;font-size:11px">Outcome</div><span style="font-size:12px;color:var(--text2)">Hasil akhir sukses</span></div>
+  </div>
+</section>
+
+</div><!-- end content-area -->
+
+<footer class="footer">
+  MariBaca — Blueprint v2.0 · April 2026 · Founder: Agastya Bimantara Putra · maribaca.com · Next.js · Node.js · PostgreSQL · PWA · i18n ID/EN
+</footer>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+// Set identitas tab as active on load
+document.addEventListener('DOMContentLoaded', () => {
+  const firstBtn = document.querySelector('.tab-btn');
+  if (firstBtn) firstBtn.classList.add('active');
+});
+</script>
+</body>
+</html>
