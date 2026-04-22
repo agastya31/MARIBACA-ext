@@ -15,7 +15,7 @@ Repository ini berisi website statis blueprint MariBaca.
 ### Opsi 2 (disarankan: local server)
 1. Masuk ke folder project:
    ```bash
-   cd /home/runner/work/MARIBACA-ext/MARIBACA-ext
+   cd path/to/MARIBACA-ext
    ```
 2. Jalankan server Python:
    ```bash
